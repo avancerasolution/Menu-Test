@@ -1,12 +1,8 @@
 import React from "react";
-import Header from "../common/Header";
-import Footer from "../common/Footer";
 
 const Contact = () => {
   return (
     <>
-      <Header />
-
       <section className="contact">
         <form>
           <h2>Contact Us</h2>
@@ -40,8 +36,6 @@ const Contact = () => {
   </motion.div>
    </motion.div>    */}
       </section>
-
-      <Footer />
     </>
   );
 };
