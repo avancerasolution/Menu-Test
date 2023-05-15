@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-
-const Header = () => {
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineLogin } from "react-icons/ai";
+import { RiAccountBoxFill } from "react-icons/ri";
+const Header = ({ orderCount }) => {
   return (
     <header>
       <nav>
@@ -22,6 +24,23 @@ const Header = () => {
           <Link to="/policy">
             <p>Policy</p>
           </Link>
+          <div className="headerIcons">
+            <p>
+              <span> {orderCount} </span>
+              <AiOutlineShoppingCart />
+            </p>
+
+            <Link to="/login">
+              <p>
+                <AiOutlineLogin />
+              </p>
+            </Link>
+            <Link to="/signup">
+              <p>
+                <RiAccountBoxFill />
+              </p>
+            </Link>
+          </div>
         </div>
       </nav>
     </header>

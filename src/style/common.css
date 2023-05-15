@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@500&family=Mulish:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@500&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Basic&family=Domine:wght@500&display=swap');
 /*-------------------- header --------------------*/
 
 nav {
@@ -25,7 +28,23 @@ nav div p {
   font-weight: 600;
   transition: all ease-in-out 300ms;
   padding: 10px 20px;
+  font-family: 'Domine', serif;
+  font-family: 'Mulish', sans-serif;
   text-align: center;
+}
+
+.headerIcons {
+  width: 240px;
+  padding: 0px
+}
+
+.headerIcons svg {
+  font-size: 24px;
+
+}
+
+.headerIcons p {
+  margin: 0 1px !important;
 }
 
 nav div p:hover {
@@ -33,6 +52,25 @@ nav div p:hover {
 
   background-color: #9d2226;
   color: white;
+}
+
+.headerIcons p span {
+  position: absolute;
+  top: 10px;
+  right: 202px;
+  z-index: 2;
+  font-size: 11px;
+  border-radius: 50%;
+  background: #d60b28;
+  width: 26px;
+  height: 26px;
+  line-height: 16px;
+  display: block;
+  padding: 8px;
+  text-align: center !important;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
 }
 
 .Slider img {
@@ -48,6 +86,15 @@ ul {
 .footer-section {
   background: #530000;
   position: relative;
+}
+
+.footer-social-icon svg {
+  font-size: 25px;
+  color: rgb(255, 225, 0);
+}
+
+.footer-social-icon svg:hover {
+  color: #9d2226;
 }
 
 .footer-cta {
@@ -183,7 +230,7 @@ ul {
   background: rgb(255, 225, 0);
   padding: 13px 20px;
   border: 1px solid rgb(255, 225, 0);
-  top: 0;
+  top: 7px;
 }
 
 .subscribe-form button i {
@@ -223,9 +270,9 @@ ul {
 
 /*----------------- contact------------------- */
 .contact {
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
-  margin: 80px 0px;
+  margin: 67px 0px;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -301,15 +348,20 @@ input {
 }
 
 .about p {
+  font-family: 'Domine', serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 1.2rem;
   line-height: 1.5;
+  font-weight: 6 00;
   margin-bottom: 1.5rem;
   text-align: center;
 }
+
 .about img {
   width: 500px;
   border-radius: 20px;
 }
+
 /*------- Pollicy ---------------*/
 .policy h1,
 h2 {
@@ -317,19 +369,235 @@ h2 {
   font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
+  font-family: 'Domine', serif;
+  font-family: 'Mulish', sans-serif;
 }
 
 .policy ul {
   list-style: disc;
   margin-left: 40px;
+
 }
 
 .policy li {
   margin-bottom: 10px;
+  font-family: 'Domine', serif;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .policy p {
   line-height: 1.5;
   margin-bottom: 30px;
+  font-family: 'Domine', serif;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: 'Mulish', sans-serif;
   text-align: center;
+}
+
+/* Menu */
+
+.col-sm-4.cards {
+
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Domine', serif;
+  font-family: 'Mulish', sans-serif;
+  transition: all ease-in-out 1000ms;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.card p {
+  font-family: 'Domine', serif;
+
+  font-size: 14px;
+
+}
+
+.col-sm-4.cards:hover {
+  transform: scale(1.1);
+}
+
+
+.card-title.h5 {
+  font-weight: 600;
+  color: #9d2226;
+}
+
+.menu button {
+  width: 60%;
+  padding: 0.5rem;
+
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: rgb(255, 218, 36);
+  transition: all ease-in-out 200ms;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  font-family: 'Basic', sans-serif;
+}
+
+.menu button:hover {
+  background-color: #9d2226;
+  color: white;
+}
+
+.menu button svg {
+  vertical-align: middle;
+  text-align: center;
+  margin-bottom: 5px;
+
+  font-weight: 800;
+}
+
+.menuHeader h2 {
+  text-align: center;
+  color: rgb(255, 218, 36);
+  font-weight: 800;
+  font-family: 'Domine', serif;
+  font-family: 'Great Vibes', cursive;
+}
+
+.menuHeader {
+  margin: 20px 0;
+}
+
+.menuHeader h2::before,
+.menuHeader h2::after {
+  display: inline-block;
+  content: "";
+  border-top: .3rem solid rgb(255, 218, 36);
+  width: 4rem;
+  margin: 0 1rem;
+  transform: translateY(-1rem);
+}
+
+.menuHeader h1 {
+  text-align: center;
+  color: black;
+  font-weight: 800;
+  font-family: 'Basic', sans-serif;
+
+}
+
+.filterBtn {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+}
+
+.filterBtn button {
+
+
+  padding: 0.5rem;
+
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-size: 1.2rem;
+  border-radius: 10px;
+
+  transition: all ease-in-out 200ms;
+  text-transform: capitalize;
+  font-weight: 600;
+  text-align: center;
+  font-family: 'Basic', sans-serif;
+  background-color: white;
+  margin: 0 20px;
+}
+
+.filterBtn button svg {
+
+
+  color: rgb(255, 218, 36);
+  margin: 0 10px;
+}
+
+.cards p span {
+  color: rgb(255, 218, 36);
+  font-weight: 700;
+}
+
+.cards img {
+  height: 200px;
+}
+
+/* cart item */
+.cartItem {
+  height: 400px;
+
+  margin: 80px 0px;
+  overflow: hidden;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.cartItem img {
+  width: 500px;
+  height: 400px;
+}
+
+.btnSection {
+  display: flex;
+  margin-top: 175px;
+}
+
+.btnSection button {
+
+  padding: 1rem;
+
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: rgb(255, 218, 36);
+  transition: all ease-in-out 200ms;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+
+  font-family: 'Basic', sans-serif;
+  margin: 0 10px;
+}
+
+.btnSection button svg {
+
+
+  color: #530000;
+}
+
+.btnSection p {
+  margin: 14px;
+}
+
+.cartItem h6 span {
+  color: rgb(255, 218, 36);
+  font-weight: 700;
+}
+
+.cartItem {
+
+  color: black;
+  font-weight: 900;
+  font-family: 'Basic', sans-serif;
+}
+
+/* login */
+.login button {
+
+  margin-top: 40px;
+}
+
+.login input {
+
+  margin-top: 40px;
 }
