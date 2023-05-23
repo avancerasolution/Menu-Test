@@ -601,3 +601,12 @@ h2 {
 
   margin-top: 40px;
 }
+
+.userData {
+  display: block;
+}
+
+
+.navmenu-item:hover .userData {
+  display: none;
+}

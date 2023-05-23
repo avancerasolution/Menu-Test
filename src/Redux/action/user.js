@@ -2,6 +2,8 @@ import axios from "axios";
 import { server } from "../store";
 import Cookies from "js-cookie";
 export const loadUser = () => async (dispatch) => {
+    const token = Cookies.get("Token")
+    console.log(token)
     try {
         dispatch({
             type: "loadUserRequest",
@@ -10,7 +12,7 @@ export const loadUser = () => async (dispatch) => {
         const { data } = await axios.get(`${server}/auth/me`, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: Cookies.get("Token")
+                'Authorization': `${token}`
             },
 
         });

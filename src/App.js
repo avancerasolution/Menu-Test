@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header orderCount={orderCount} isAuthenticated={isAuthenticated} />
+        <Header orderCount={orderCount} isAuthenticated={isAuthenticated} user={user} />
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/contact" element={<Contact />} />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsCartDash } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 const Cart = ({ setorderCount, orderCount }) => {
   const { state } = useLocation();
@@ -18,6 +18,7 @@ const Cart = ({ setorderCount, orderCount }) => {
   }
   return (
     <div className="cartItem container ">
+      <Toaster />
       <div className="row">
         <div className="col-sm-6">
           <img src={data.photo} alt="" />
