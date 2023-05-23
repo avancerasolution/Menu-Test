@@ -4,7 +4,8 @@ import logo from "../assets/logo.png";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineLogin } from "react-icons/ai";
 import { RiAccountBoxFill } from "react-icons/ri";
-const Header = ({ orderCount }) => {
+const Header = ({ orderCount, isAuthenticated }) => {
+  console.log(isAuthenticated, "okoko");
   return (
     <header>
       <nav>

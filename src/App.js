@@ -8,15 +8,46 @@ import Header from "./common/Header";
 import Footer from "./common/Footer";
 import Policy from "./component/Policy";
 import Cart from "./common/Cart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./component/Login";
 import Signup from "./component/Signup";
+import { loadUser } from "./Redux/action/user";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+
+
 function App() {
   const [orderCount, setorderCount] = useState(0)
+
+  const dispatch = useDispatch();
+  const { error, message, user, isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+    dispatch({
+      type: "clearError",
+    });
+    if (message) {
+      toast.success(message);
+    }
+    dispatch({
+      type: "clearMessage",
+    });
+  }, [dispatch, error, message]);
+
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Header orderCount={orderCount} />
+        <Header orderCount={orderCount} isAuthenticated={isAuthenticated} />
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/contact" element={<Contact />} />
