@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../Redux/action/user";
+import { loadUser, login } from "../Redux/action/user";
 import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const Login = () => {
   const submit = async (event) => {
     event.preventDefault();
     await dispatch(login({ email, password }));
+    dispatch(loadUser());
     navigate("/");
   };
   useEffect(() => {

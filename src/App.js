@@ -50,10 +50,10 @@ function App() {
         <Header orderCount={orderCount} isAuthenticated={isAuthenticated} user={user} />
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={<Contact isAuthenticated={isAuthenticated} />} />
           <Route path="/about" element={<About />} />
           <Route path="/policy" element={<Policy />} />
-          <Route path="/cart" element={<Cart setorderCount={setorderCount} orderCount={orderCount} />} />
+          <Route path="/cart" element={<Cart setorderCount={setorderCount} orderCount={orderCount} isAuthenticated={isAuthenticated} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

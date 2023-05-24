@@ -52,7 +52,7 @@ export const login = ({ email, password }) => async (dispatch) => {
         Cookies.set("Token", data.tokens.token);
         dispatch({
             type: "loginSuccess",
-            payload: data.tokens.token
+            payload: "Login Successfully"
         });
     } catch (error) {
         dispatch({
