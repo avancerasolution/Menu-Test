@@ -14,11 +14,14 @@ import Signup from "./component/Signup";
 import { loadUser } from "./Redux/action/user";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import SideBar from "./common/SideBar";
+import CartItem from "./component/CartItem";
+import ConfirmOrder from "./common/ConfirmOrder";
 
 
 function App() {
   const [orderCount, setorderCount] = useState(0)
-
+  const [cartItems, setCartItems] = useState([]);
   const dispatch = useDispatch();
   const { error, message, user, isAuthenticated } = useSelector(
     (state) => state.auth
@@ -52,8 +55,11 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/contact" element={<Contact isAuthenticated={isAuthenticated} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/cartItem" element={<CartItem setCartItems={setCartItems} cartItems={cartItems} orderCount={orderCount} />} />
+          <Route path="/confirmorder" element={<ConfirmOrder />} />
+
           <Route path="/policy" element={<Policy />} />
-          <Route path="/cart" element={<Cart setorderCount={setorderCount} orderCount={orderCount} isAuthenticated={isAuthenticated} />} />
+          <Route path="/cart" element={<Cart setorderCount={setorderCount} orderCount={orderCount} isAuthenticated={isAuthenticated} setCartItems={setCartItems} cartItems={cartItems} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

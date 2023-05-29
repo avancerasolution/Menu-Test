@@ -12,7 +12,13 @@ import { useNavigate } from "react-router-dom";
 import { loadUser } from "../Redux/action/user";
 import { logout } from "../Redux/action/signup";
 
-const Header = ({ orderCount, isAuthenticated, user }) => {
+const Header = ({
+  orderCount,
+  isAuthenticated,
+  user,
+  showCartItem,
+  setShowCartItem,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { messages, error } = useSelector((state) => state.signup);
@@ -57,11 +63,13 @@ const Header = ({ orderCount, isAuthenticated, user }) => {
             <p>Policy</p>
           </Link>
           <div className="headerIcons">
-            <p>
-              <span> {orderCount} </span>
-              <AiOutlineShoppingCart />
-            </p>
-
+            <Link to="/cartItem">
+              {" "}
+              <p>
+                <span> {orderCount} </span>
+                <AiOutlineShoppingCart />
+              </p>
+            </Link>
             {!isAuthenticated ? (
               <>
                 {" "}
@@ -78,10 +86,7 @@ const Header = ({ orderCount, isAuthenticated, user }) => {
               </>
             ) : (
               <div className="dropdown">
-                <img src={userImage} alt="" />
-                <p>
-                  {user.first_name} {user.last_name}
-                </p>
+                <p>{user.first_name}</p>
 
                 <span>
                   <IoMdArrowDropdownCircle />

@@ -660,3 +660,81 @@ h2 {
 .cartItem h6 {
   margin-top: 30px;
 }
+
+.cartItemDetail {
+  display: flex;
+}
+
+
+
+
+.cartItem1 {
+  color: black;
+  font-weight: 900;
+  font-family: 'Basic', sans-serif;
+  width: 80%;
+  margin: 100px auto;
+  padding: 0 50px;
+}
+
+.cartItemDetail {
+  height: fit-content;
+  min-height: 200px;
+}
+
+.cartItemDetail img {
+  width: 600px;
+  margin-right: 10px;
+}
+
+.cartItemDetail h4 {
+  text-align: center;
+}
+
+.cartItemDetailsub {
+  margin-left: 10px;
+}
+
+.cartItemDetail button {
+
+  border: none;
+  color: #202020;
+  padding: 30px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.contact1 {
+  /* height: 100vh; */
+  width: 80% !important;
+  margin: 67px auto !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block !important;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.contact1 div {
+  width: 100% !important;
+}
+
+.contact1 div input,
+select {
+  width: 100% !important;
+  padding: 10px;
+  margin: 10px !important;
+
+}
+
+.contact1 form {
+  width: 80% !important;
+  margin: 0 auto;
+}
+
+.contact1 select {
+  border: 2px solid black;
+}

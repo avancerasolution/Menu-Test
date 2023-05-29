@@ -57,7 +57,7 @@ function Menu() {
                 onClick={() => handleCategoryClick(item.item_category_id)}
                 key={item._id}
               >
-                <img src={item.category_code} alt="img" />
+                {/* <img src={item.category_code} alt="img" /> */}
                 {item.category_code}
               </button>
             </>
@@ -73,9 +73,8 @@ function Menu() {
                     <Card.Img
                       variant="top"
                       src={
+                        "http://192.168.100.12:5000/assets/" +
                         data.item_main_picture_url_thumb
-                          ? data.item_main_picture_url_thumb
-                          : banner2
                       }
                     />
                     <Card.Body>
@@ -116,7 +115,10 @@ function Menu() {
                     <Card style={{ width: "18rem" }} className="col-sm-3 ">
                       <Card.Img
                         variant="top"
-                        src={data.item_main_picture_url_thumb}
+                        src={
+                          "http://192.168.100.12:5000/assets/" +
+                          data.item_main_picture_url_thumb
+                        }
                       />
                       <Card.Body>
                         <Card.Title>{data.title}</Card.Title>
