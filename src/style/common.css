@@ -17,19 +17,21 @@ nav {
   display: none;
   position: absolute;
   top: 40px;
-  left: 40px;
+  left: 5px;
   border: 1px solid #efefef;
   border-radius: .4em;
   min-width: 100px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 12px 12px;
   z-index: 1;
   background: #530000;
   color: white;
   cursor: pointer;
+  width: 200px;
 }
 
-
+.dropdown-content p {
+  color: white !important;
+}
 
 .dropdown svg {
   color: #530000;
@@ -668,6 +670,7 @@ h2 {
 
 
 
+
 .cartItem1 {
   color: black;
   font-weight: 900;
@@ -724,7 +727,7 @@ h2 {
 
 .contact1 div input,
 select {
-  width: 100% !important;
+  width: 97% !important;
   padding: 10px;
   margin: 10px !important;
 
@@ -737,4 +740,180 @@ select {
 
 .contact1 select {
   border: 2px solid black;
+}
+
+.cartItemDetail {
+  margin: 30px;
+}
+
+/* table */
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.tableContent {
+  margin: 100px 14px !important;
+}
+
+.header {
+  background-color: rgb(230, 230, 230);
+  justify-content: space-between;
+  height: 80px;
+  text-align: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.header button {
+  padding: 10px 50px;
+  background-color: #850000;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 10px;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: all ease-in-out 200ms;
+}
+
+.header button:active {
+  background: rgb(245, 217, 4);
+  color: #000;
+}
+
+.header button:hover {
+  background: rgb(245, 217, 4);
+  color: #000;
+}
+
+.header h5 {
+
+  font-size: 34px;
+  font-weight: 700;
+
+}
+
+.tableContent table {
+  width: 100%;
+  margin: 20px 0px;
+
+}
+
+.tableContent thead {
+  background-color: #850000;
+
+  border-radius: 20px !important;
+
+}
+
+.tableContent th {
+  padding: 20px 40px;
+  font-size: 19px;
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+}
+
+.tableContent table thead th:first-child {
+  border-radius: 20px 0px 0px 30px;
+}
+
+.tableContent table thead th:last-child {
+  border-radius: 0px 20px 30px 0px;
+}
+
+.tableContent td {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.tableContent td svg {
+  text-align: center;
+  font-size: 20px;
+  color: #850000;
+  margin: 2px;
+  cursor: pointer;
+}
+
+.orderDetail table {
+  width: 100%;
+
+}
+
+.orderDetail th,
+td {
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 20px;
+}
+
+.orderDetail th {
+  font-size: 20px;
+}
+
+.modal-footer>button {
+
+  padding: 1rem;
+
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: rgb(255, 218, 36);
+  transition: all ease-in-out 200ms;
+}
+
+.modal-footer>button:hover {
+  background-color: #9d2226;
+  color: white;
+}
+
+.tableContent button {
+  padding: 1rem;
+
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: rgb(255, 218, 36);
+  transition: all ease-in-out 200ms;
+
+}
+
+.tableContent button:hover {
+  background-color: #9d2226;
+  color: white;
+}
+
+.cartItem1 input {
+  width: 230px;
+  margin: 0 40px;
+}
+
+.checkoutBtn {
+  float: right;
+  margin-right: 230px !important;
+}
+
+.checkoutBtn button {
+  padding: 1rem;
+
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: rgb(255, 218, 36);
+  transition: all ease-in-out 200ms;
+}
+
+.checkoutBtn button:hover {
+  background-color: #6b0101;
+  color: white;
 }

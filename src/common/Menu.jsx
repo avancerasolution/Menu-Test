@@ -121,7 +121,7 @@ function Menu() {
                         }
                       />
                       <Card.Body>
-                        <Card.Title>{data.title}</Card.Title>
+                        <Card.Title>{data.item_name}</Card.Title>
                         <hr />
                         <Card.Text>{data.item_short_description}</Card.Text>
                         <p>

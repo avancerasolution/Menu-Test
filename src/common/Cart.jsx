@@ -14,7 +14,7 @@ const Cart = ({
   const { state } = useLocation();
   const navigate = useNavigate();
   const { data } = state;
-  console.log(data);
+
   const [quantityCount, setquantityCount] = useState(0);
   const handleAddtoCart = (data) => {
     if (isAuthenticated) {

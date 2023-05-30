@@ -1,16 +1,16 @@
 import axios from "axios";
 import { server } from "../store";
 import Cookies from "js-cookie";
-export const signup = ({ first_name, last_name, main_email, password, user_type }) => async (dispatch) => {
-    console.log(first_name, last_name, main_email, password, user_type)
+export const signup = ({ first_name, last_name, main_email, password }) => async (dispatch) => {
+    console.log(first_name, last_name, main_email, password,)
     try {
         dispatch({
             type: "signup",
         });
 
-        const { data } = await axios.post(`${server}/user`, {
+        const { data } = await axios.post(`${server}/customer`, {
 
-            first_name, last_name, main_email, password, user_type
+            first_name, last_name, main_email, password
         }, {
 
 

@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineLogin } from "react-icons/ai";
 import { RiAccountBoxFill } from "react-icons/ri";
-import userImage from "../assets/user.png";
+
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
@@ -43,6 +43,9 @@ const Header = ({
     }
   }, [dispatch, error, messages, navigate]);
 
+  useEffect(() => {
+    localStorage.setItem("quantity", JSON.stringify(orderCount));
+  }, [orderCount]);
   return (
     <header>
       <nav>
@@ -91,7 +94,11 @@ const Header = ({
                 <span>
                   <IoMdArrowDropdownCircle />
                 </span>
+
                 <div class="dropdown-content">
+                  <Link to="/myprofile">
+                    <p>My Profile</p>
+                  </Link>
                   <p onClick={handleLogout}>Logout</p>
                 </div>
               </div>
