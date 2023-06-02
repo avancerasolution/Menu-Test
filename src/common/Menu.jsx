@@ -107,10 +107,9 @@ function Menu() {
           </div>
         ) : (
           <>
-            {" "}
             <div className="row">
-              {data &&
-                data.map((data) => (
+              {filteredData &&
+                filteredData.map((data) => (
                   <div className="col-sm-4 cards" key={data.id}>
                     <Card style={{ width: "18rem" }} className="col-sm-3 ">
                       <Card.Img

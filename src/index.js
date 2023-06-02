@@ -5,10 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './Redux/store.js'
 import { Provider } from 'react-redux'
+import { ToastContainer } from 'react-bootstrap';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ToastContainer />
     <Provider store={store}>
       <App />
     </Provider>

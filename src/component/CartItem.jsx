@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { fetchVoucher } from "../Redux/action/voucher";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { checkout } from "../Redux/action/checkout";
@@ -28,7 +26,6 @@ const CartItem = ({ setCartItems, cartItems, orderCount, user }) => {
     voucher_code: "",
     voucher_no: 1,
     t_date: "12-12-12",
-
     unit_price: 99.99,
     total_price: 10.05,
     temp_record: 105,
@@ -52,6 +49,7 @@ const CartItem = ({ setCartItems, cartItems, orderCount, user }) => {
 
       setrecords([...records, formData]);
       await dispatch(checkout(formData));
+      toast.success("Order Submitted Successfully");
     } catch (error) {
       const err = error.response.data.message;
       toast.error(err);
