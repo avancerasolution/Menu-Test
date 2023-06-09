@@ -24,4 +24,4 @@ export const store = configureStore({
     },
 })
 
-export const server = "http://192.168.100.12:5000/api";
+export const server = "http://localhost:5000/api";
