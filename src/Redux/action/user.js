@@ -3,7 +3,7 @@ import { server } from "../store";
 import Cookies from "js-cookie";
 export const loadUser = () => async (dispatch) => {
     const token = Cookies.get("Token")
-    console.log(token)
+
     try {
         dispatch({
             type: "loadUserRequest",
@@ -30,7 +30,7 @@ export const loadUser = () => async (dispatch) => {
 };
 
 export const login = ({ email, password }) => async (dispatch) => {
-    console.log(email, password)
+
 
     try {
         const config = {

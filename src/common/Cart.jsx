@@ -50,7 +50,7 @@ const Cart = ({
         <div className="col-sm-6">
           <img
             src={
-              "http://192.168.100.12:5000/assets/" +
+              "http://154.12.253.133:5000/assets" +
               data.item_main_picture_url_thumb
             }
             alt=""

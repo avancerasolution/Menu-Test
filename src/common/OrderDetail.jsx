@@ -11,7 +11,7 @@ const OrderDetail = ({ id }) => {
   useEffect(() => {
     dispatch(fetchOrderDetail({ id }));
   }, [dispatch, id]);
-  console.log(orderdetail, "okokokokokoko");
+
   return (
     <div className="orderDetail">
       <div>

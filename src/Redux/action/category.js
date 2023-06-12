@@ -7,7 +7,7 @@ export const fetchCategory = () => async (dispatch) => {
 
     try {
         const response = await axios.get(`${server}/item-category`)
-        console.log(response, "dsadsa")
+
         const data = await response.data.result;
         dispatch(fetchCategorySuccess(data));
     } catch (error) {

@@ -8,6 +8,7 @@ import voucherReducer from './reducer/voucherReducer';
 import { checkOutreducer } from './reducer/checkoutreducer';
 import orderreducer from './reducer/orderreducer';
 import orderDetailReducer from './reducer/orderDetailReducer';
+import aboutReducer from './reducer/aboutReducer';
 
 export const store = configureStore({
     reducer: {
@@ -19,9 +20,10 @@ export const store = configureStore({
         voucher: voucherReducer,
         checkcout: checkOutreducer,
         order: orderreducer,
-        orderdetail: orderDetailReducer
+        orderdetail: orderDetailReducer,
+        about: aboutReducer
 
     },
 })
 
-export const server = "http://localhost:5000/api";
+export const server = "http://154.12.253.133:5000/api";

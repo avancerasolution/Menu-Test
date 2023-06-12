@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { checkout } from "../Redux/action/checkout";
+import { useNavigate } from "react-router-dom";
 
 const CartItem = ({ setCartItems, cartItems, orderCount, user }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [voucher_code, setvoucher_code] = useState();
   const { message, error } = useSelector((state) => state.checkcout);
@@ -50,6 +52,7 @@ const CartItem = ({ setCartItems, cartItems, orderCount, user }) => {
       setrecords([...records, formData]);
       await dispatch(checkout(formData));
       toast.success("Order Submitted Successfully");
+      navigate("/myprofile");
     } catch (error) {
       const err = error.response.data.message;
       toast.error(err);

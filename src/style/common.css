@@ -549,10 +549,10 @@ h2 {
 }
 
 .filterBtn button img {
-
-
   color: rgb(255, 218, 36);
   margin: 0 10px;
+  WIDTH: 40PX;
+  height: 40px;
 }
 
 .filterBtn button svg {

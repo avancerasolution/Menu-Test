@@ -12,19 +12,20 @@ import banner2 from "../assets/banner2.jpg";
 function Menu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [showAllData, setShowAllData] = useState(true);
   const { data, loading, error } = useSelector((state) => state.menu);
   const { category } = useSelector((state) => state.category);
   const [filteredData, setFilteredData] = useState([]);
 
   const handleCategoryClick = (filterId) => {
+    setShowAllData(false);
     const filteredResult = data.filter(
-      (item) => item.Items_Category.item_category_id === filterId
+      (item) => item.item_category_id === filterId
     );
 
     setFilteredData(filteredResult);
   };
-  console.log(filteredData, "okok");
+
   useEffect(() => {
     if (loading) {
     }
@@ -47,7 +48,7 @@ function Menu() {
         <h1>Most Popular Items</h1>
       </div>
       <div className="filterBtn">
-        <button onClick={() => handleCategoryClick()}>
+        <button onClick={() => setShowAllData(true)}>
           <BiFoodMenu /> All
         </button>
         {category &&
@@ -57,14 +58,19 @@ function Menu() {
                 onClick={() => handleCategoryClick(item.item_category_id)}
                 key={item._id}
               >
-                {/* <img src={item.category_code} alt="img" /> */}
+                <img
+                  src={
+                    "http://154.12.253.133:5000/assets/" + item.main_picture_url
+                  }
+                  alt=""
+                />
                 {item.category_code}
               </button>
             </>
           ))}
       </div>
       <div className="container menu">
-        {filteredData.length > 0 ? (
+        {!showAllData ? (
           <div className="row">
             {filteredData &&
               filteredData.map((data) => (
@@ -108,8 +114,8 @@ function Menu() {
         ) : (
           <>
             <div className="row">
-              {filteredData &&
-                filteredData.map((data) => (
+              {data &&
+                data.map((data) => (
                   <div className="col-sm-4 cards" key={data.id}>
                     <Card style={{ width: "18rem" }} className="col-sm-3 ">
                       <Card.Img
