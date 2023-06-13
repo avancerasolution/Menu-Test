@@ -8,7 +8,7 @@ export const fetchAbout = () => async (dispatch) => {
     try {
         const response = await axios.get(`${server}/content/heading/about_us`)
 
-        const data = await response.data.result;
+        const data = await response.data;
         dispatch(fetchAboutSuccess(data));
     } catch (error) {
         dispatch(fetchAboutFailure(error.message));

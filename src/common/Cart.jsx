@@ -65,7 +65,7 @@ const Cart = ({
             </span>
           </h6>
           <p>Deal No : {data.item_hot_deal}</p>
-          <p>Category :{data.Items_Category.category_code}</p>
+          {/* <p>Category :{data.items_Category.category_code}</p> */}
           <p>{data.item_short_description}</p>
           <p>{data.item_description_html}</p>
           <div className="btnSection">

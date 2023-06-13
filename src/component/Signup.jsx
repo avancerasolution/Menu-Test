@@ -25,7 +25,7 @@ const Signup = () => {
       toast.success(messages);
       dispatch({ type: "clearMessage" });
       dispatch({ type: "emptyState" });
-      navigate("/");
+      navigate("/login");
     }
     if (error) {
       toast.error(error);

@@ -80,7 +80,7 @@ const CartItem = ({ setCartItems, cartItems, orderCount, user }) => {
           <div className="col-sm-5">
             <img
               src={
-                "http://192.168.100.12:5000/assets/" +
+                "http://154.12.253.133:5000/assets/" +
                 data.item_main_picture_url_thumb
               }
               alt=""
@@ -88,8 +88,11 @@ const CartItem = ({ setCartItems, cartItems, orderCount, user }) => {
           </div>
           <div className="col-sm-4 cartItemDetailsub">
             <h4>{data.item_name}</h4>
-            <h6>{data.Items_Category.category_code}</h6>
-            <p>{data.item_description_html}</p>
+            {/* <h6>
+              {data.Items_Category.category_code &&
+                data.Items_Category.category_code}
+            </h6> */}
+            {/* <p>{data.item_description_html && data.item_description_html}</p> */}
             <p>{orderCount}Qty</p>
           </div>
         </div>

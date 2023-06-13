@@ -79,7 +79,7 @@ function Menu() {
                     <Card.Img
                       variant="top"
                       src={
-                        "http://192.168.100.12:5000/assets/" +
+                        "http://154.12.253.133:5000/assets/" +
                         data.item_main_picture_url_thumb
                       }
                     />
@@ -121,7 +121,7 @@ function Menu() {
                       <Card.Img
                         variant="top"
                         src={
-                          "http://192.168.100.12:5000/assets/" +
+                          "http://154.12.253.133:5000/assets/" +
                           data.item_main_picture_url_thumb
                         }
                       />

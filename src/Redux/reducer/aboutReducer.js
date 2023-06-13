@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const aboutSlice = createSlice({
     name: 'about',
     initialState: {
-        about: null,
+        about: undefined,
         loading: false,
         error: null,
     },

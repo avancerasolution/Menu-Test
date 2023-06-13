@@ -29,6 +29,10 @@ const Header = ({
     dispatch(loadUser());
     navigate("/");
   };
+  const handleAuthenticated = () => {
+    navigate("/login");
+    toast("Please Login to access this resource");
+  };
 
   useEffect(() => {
     if (messages) {
@@ -66,13 +70,21 @@ const Header = ({
             <p>Policy</p>
           </Link>
           <div className="headerIcons">
-            <Link to="/cartItem">
-              {" "}
-              <p>
+            {isAuthenticated ? (
+              <Link to="/cartItem">
+                {" "}
+                <p>
+                  <span> {orderCount} </span>
+                  <AiOutlineShoppingCart />
+                </p>
+              </Link>
+            ) : (
+              <p onClick={handleAuthenticated}>
                 <span> {orderCount} </span>
                 <AiOutlineShoppingCart />
               </p>
-            </Link>
+            )}
+
             {!isAuthenticated ? (
               <>
                 {" "}
