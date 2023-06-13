@@ -31,11 +31,12 @@ function About() {
               ) : (
                 <img
                   src={
-                    "http://154.12.253.133:5000/assets" + about.result.image ===
+                    "http://154.12.253.133:5000/assets/" +
+                      about.result.image ===
                     undefined ? (
                       <></>
                     ) : (
-                      about.result.image
+                      "http://154.12.253.133:5000/assets/" + about.result.image
                     )
                   }
                   alt="Image"

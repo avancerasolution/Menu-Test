@@ -19,19 +19,19 @@ const Signup = () => {
     await dispatch(
       signup({ first_name, last_name, main_email, password, user_type })
     );
+    navigate("/login");
   };
   useEffect(() => {
     if (messages) {
       toast.success(messages);
       dispatch({ type: "clearMessage" });
       dispatch({ type: "emptyState" });
-      navigate("/login");
     }
     if (error) {
       toast.error(error);
       dispatch({ type: "clearError" });
     }
-  }, [dispatch, error, messages, navigate]);
+  }, [dispatch, error, messages]);
 
   return (
     <section className="contact login">

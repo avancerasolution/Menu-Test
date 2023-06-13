@@ -16,6 +16,7 @@ const Contact = ({ isAuthenticated }) => {
     event.preventDefault();
     if (isAuthenticated) {
       await dispatch(contact({ message, email, subject }));
+      navigate("/");
     } else {
       toast.error("Please Login to Access This Resource");
     }
@@ -26,7 +27,6 @@ const Contact = ({ isAuthenticated }) => {
       toast.success(messages);
       dispatch({ type: "clearMessage" });
       dispatch({ type: "emptyState" });
-      // navigate("/");
     }
     if (error) {
       toast.error(error);
