@@ -10,27 +10,76 @@ const Cart = ({
   isAuthenticated,
   setCartItems,
   cartItems,
+  singleOrderQuantity,
+  setSingleOrderQuantity,
 }) => {
   const { state } = useLocation();
-  const navigate = useNavigate();
   const { data } = state;
 
   const [quantityCount, setquantityCount] = useState(0);
-  const handleAddtoCart = (data) => {
-    if (isAuthenticated) {
-      setCartItems([...cartItems, data]);
+  const [update, setUpdate] = useState([]);
+  const items = JSON.parse(localStorage.getItem("items"));
 
-      toast.success(
-        `${quantityCount}  ${data.item_name} is Added in your Cart`
+  const handleAddtoCart = (item, singleOrderQuantity) => {
+    if (isAuthenticated) {
+      const existingItem = items.find(
+        (cartItem) => cartItem.item_id === item.item_id
       );
 
-      setorderCount(orderCount + quantityCount);
+      if (existingItem) {
+        const updatedCartItems = cartItems.map((cartItem) => {
+          if (cartItem.item_id === item.item_id) {
+            toast.success(
+              `${singleOrderQuantity} ${data.item_name} is added in your cart`
+            );
+            return {
+              ...cartItem,
+              quantity: cartItem.quantity + singleOrderQuantity,
+            };
+          }
+          setorderCount(orderCount + cartItem.quantity);
+          return cartItem;
+        });
+        setCartItems(updatedCartItems);
+      } else {
+        toast.success(
+          `${singleOrderQuantity} ${data.item_name} is added in your cart`
+        );
+        const updatedCartItems = [
+          ...cartItems,
+          { ...item, item, quantity: singleOrderQuantity },
+        ];
+        setCartItems(updatedCartItems);
+      }
     } else {
-      toast.error("Please Login to access this resourse");
+      toast.error("Please Login To Access this Resource");
     }
   };
+
+  // const handleAddtoCart = (data, singleOrderQuantity) => {
+  //   const i = items.findIndex((e) => e.item_id === data.item_id);
+  //   console.log(i)
+  //   if (i.length === -1) {
+  //     alert("matched");
+  //
+  //   }
+  //   const item = [...items];
+  //   const updatedData = item.map((i, e) => {
+  //     if (i.item_id === data.item_id) {
+  //       i.quantity += singleOrderQuantity;
+
+  //       setCartItems([...item]);
+  //       alert("nomatched");
+  //       return i;
+  //     }
+  //     return i;
+  //   });
+  // };
   if (quantityCount < 0) {
-    setquantityCount(0);
+    setorderCount(singleOrderQuantity);
+  }
+  if (singleOrderQuantity < 1) {
+    setSingleOrderQuantity(1);
   }
   const calculateTotalPrice = (price, quantity) => {
     const taxRate = 0.13; // 13% tax rate
@@ -41,10 +90,19 @@ const Cart = ({
     return totalPrice;
   };
   useEffect(() => {
+    setSingleOrderQuantity(1);
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("items", JSON.stringify(cartItems));
-  }, [cartItems]);
+  }, [cartItems, setSingleOrderQuantity]);
   return (
-    <div className="cartItem container ">
+    <div
+      onClick={() => {
+        console.log(cartItems, "<==== items cart");
+      }}
+      className="cartItem container "
+    >
       <Toaster />
       <div className="row">
         <div className="col-sm-6">
@@ -69,20 +127,24 @@ const Cart = ({
           <p>{data.item_short_description}</p>
           <p>{data.item_description_html}</p>
           <div className="btnSection">
-            <button onClick={() => setquantityCount(quantityCount - 1)}>
+            <button
+              onClick={() => setSingleOrderQuantity(singleOrderQuantity - 1)}
+            >
               -
             </button>
             <p>
-              Qty: <span> {quantityCount} </span>
+              Qty: <span> {singleOrderQuantity} </span>
             </p>
-            <button onClick={() => setquantityCount(quantityCount + 1)}>
+            <button
+              onClick={() => setSingleOrderQuantity(singleOrderQuantity + 1)}
+            >
               +
             </button>
-            <button onClick={() => handleAddtoCart(data)}>
+            <button onClick={() => handleAddtoCart(data, singleOrderQuantity)}>
               <BsCartDash /> Add to Cart
             </button>
           </div>
-          Total {calculateTotalPrice(data.item_price1, quantityCount)}
+          Total {calculateTotalPrice(data.item_price1, singleOrderQuantity)}
         </div>
       </div>
     </div>

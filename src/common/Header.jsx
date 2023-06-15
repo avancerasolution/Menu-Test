@@ -18,6 +18,7 @@ const Header = ({
   user,
   showCartItem,
   setShowCartItem,
+  setorderCount,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +27,9 @@ const Header = ({
   const handleLogout = async (event) => {
     event.preventDefault();
     await dispatch(logout());
+    setorderCount(0);
     dispatch(loadUser());
+
     navigate("/");
   };
   const handleAuthenticated = () => {
@@ -46,10 +49,13 @@ const Header = ({
       dispatch({ type: "clearError" });
     }
   }, [dispatch, error, messages, navigate]);
+  const items = JSON.parse(localStorage.getItem("items"));
 
+  const totalValue = items.reduce((sum, item) => sum + item.quantity, 0);
+  setorderCount(totalValue);
   useEffect(() => {
-    localStorage.setItem("quantity", JSON.stringify(orderCount));
-  }, [orderCount]);
+    localStorage.setItem("totalValue", JSON.stringify(totalValue));
+  }, [orderCount, totalValue]);
   return (
     <header>
       <nav>
@@ -80,7 +86,7 @@ const Header = ({
               </Link>
             ) : (
               <p onClick={handleAuthenticated}>
-                <span> {orderCount} </span>
+                <span> {totalValue} </span>
                 <AiOutlineShoppingCart />
               </p>
             )}

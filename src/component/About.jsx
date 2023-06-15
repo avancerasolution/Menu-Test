@@ -17,6 +17,9 @@ function About() {
       toast.error(error);
     }
   }, [error]);
+  if (error) {
+    return <div>Some thing Went Wrong </div>;
+  }
 
   return (
     <div className="container about">
@@ -44,21 +47,10 @@ function About() {
               )}
             </div>
           )}
-          <div className="col-sm-6">
-            {about.result.details && about.result.details === undefined ? (
-              <></>
-            ) : (
-              <p>
-                {convert(
-                  about.result.details === undefined ? (
-                    <></>
-                  ) : (
-                    about.result.details
-                  )
-                )}
-              </p>
-            )}
-          </div>
+          <div
+            className="col-sm-6"
+            dangerouslySetInnerHTML={{ __html: about.result.details }}
+          ></div>
         </div>
       )}
     </div>

@@ -38,6 +38,7 @@ const OrderDetail = ({ id }) => {
                   <td>{data.qty}</td>
                   <td>{data.transaction_id}</td>
                   <td>{data.tax}</td>
+                  <td>{data.discount}</td>
                   <td>{data.unit_price}</td>
                   <td>{data.total_price}</td>
                 </tr>

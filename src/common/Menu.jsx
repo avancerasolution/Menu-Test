@@ -96,15 +96,15 @@ function Menu() {
                       </p>
                       <button
                         variant="primary"
-                        onClick={() =>
+                        onClick={() => {
                           navigate("/cart", {
                             state: {
                               data: data,
                             },
-                          })
-                        }
+                          });
+                        }}
                       >
-                        <BsCartDash /> Add to Cart
+                        View Detail
                       </button>
                     </Card.Body>
                   </Card>
@@ -145,7 +145,7 @@ function Menu() {
                             })
                           }
                         >
-                          <BsCartDash /> Add to Cart
+                          View Detail
                         </button>
                       </Card.Body>
                     </Card>

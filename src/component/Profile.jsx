@@ -18,7 +18,7 @@ const Profile = ({ user }) => {
     await setShowDetail(id);
     setModalShow(true);
   };
-
+  console.log(order, "test");
   return (
     <div className="container-fluid tableContent">
       <div>
@@ -29,8 +29,10 @@ const Profile = ({ user }) => {
 
             <th>Action</th>
           </thead>
+
           {order &&
-            order.map((data) => (
+            order.result &&
+            order.result.map((data) => (
               <tbody>
                 <td>{data.transaction_id}</td>
                 <td>{data.createdAt.split("T")[0]}</td>

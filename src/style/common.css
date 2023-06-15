@@ -917,3 +917,101 @@ td {
   background-color: #6b0101;
   color: white;
 }
+
+.cartItem1 table {
+  width: 100%;
+}
+
+.cartItem1 tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+  text-align: left;
+}
+
+.cartItem1 h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #530000;
+}
+
+.cartItem1 img {
+  width: 100px;
+  height: 100px;
+}
+
+.cartItem1 table {
+  margin: 100px 0px;
+}
+
+.cartItem1 table th {
+  font-size: 22px;
+  text-align: unset;
+
+
+}
+
+.cartItem1 {
+  background-color: white;
+}
+
+.cardImage img {
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+}
+
+.cardImage h2 {
+  text-align: left;
+}
+
+.cartItem1 table td>button {
+  background-color: #cfcfcf;
+
+  border: none;
+  padding: 20px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.checkOutBtn {
+
+  cursor: pointer;
+  background-color: #530000;
+  border: none;
+  padding: 18px;
+  position: relative;
+  right: 40px;
+  color: white;
+}
+
+.btnSection1 {
+  display: flex;
+}
+
+.btnSection1 button {
+  padding: 10px;
+  margin: 0 10px;
+  border: none;
+  width: 40px;
+}
+
+.btnSection1 p {
+  text-align: center;
+  padding: 15px 4px;
+}
+
+.cartItem1 {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  min-height: 88vh;
+}
+
+.orderDetail td {
+  text-align: center;
+}
