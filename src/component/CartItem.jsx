@@ -7,6 +7,7 @@ import { checkout } from "../Redux/action/checkout";
 import { useNavigate } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 import { BsCartDash } from "react-icons/bs";
+import { fetchVoucherCode } from "../Redux/action/vouchercode";
 
 const CartItem = ({
   setCartItems,
@@ -21,6 +22,7 @@ const CartItem = ({
   const dispatch = useDispatch();
   const [voucher_code, setvoucher_code] = useState();
   const { message, error } = useSelector((state) => state.checkcout);
+  const { voucherbycode } = useSelector((state) => state.vouchercode);
   const [data, setData] = useState([]);
 
   const items = JSON.parse(localStorage.getItem("items"));
@@ -38,7 +40,7 @@ const CartItem = ({
   const [registeration, setregisteration] = useState({
     // customer_id: user.customer_id,
     cart: cart,
-    voucher_code: "",
+
     voucher_no: 1,
     t_date: "12-12-12",
     unit_price: 99.99,
@@ -54,7 +56,7 @@ const CartItem = ({
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-
+    registeration.voucher_code = value;
     setregisteration({ ...registeration, [name]: value });
   };
 
@@ -77,6 +79,9 @@ const CartItem = ({
         tax: 99.99,
         item_no: 99,
       };
+      if (registeration.voucher_code) {
+        register.voucher_code = registeration.voucher_code;
+      }
       const formData = { ...register };
       console.log(formData, "datataata");
       setrecords([...records, formData]);
@@ -87,19 +92,28 @@ const CartItem = ({
       toast.error(error);
     }
   };
-  const removeElement = (index, quantityindex) => {
-    setData(data.filter((_, i) => i !== index));
+  const removeElement = async (index, quantityindex) => {
+    const updateItems = data.filter((_, i) => i !== index);
+    setData(updateItems);
+    setCartItems(updateItems);
+    items.filter((_, i) => i !== index);
+    await localStorage.setItem("items", JSON.stringify(updateItems));
     setorderCount(orderCount - quantityindex);
   };
 
   const calculateTotalPrice = (price, quantity) => {
-    const taxRate = 0.13; // 13% tax rate
     const subtotal = price * quantity;
-    const taxAmount = subtotal * taxRate;
-    const totalPrice = subtotal + taxAmount;
 
-    return Math.round(totalPrice);
+    return Math.round(subtotal);
   };
+  // const calculateTotalPrice = (price, quantity) => {
+  //   const taxRate = 0.13; // 13% tax rate
+  //   const subtotal = price * quantity;
+  //   const taxAmount = subtotal * taxRate;
+  //   const totalPrice = subtotal + taxAmount;
+
+  //   return Math.round(totalPrice);
+  // };
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -114,11 +128,19 @@ const CartItem = ({
     setData(items);
   }, []);
 
+  const handleApplyVoucherCode = () => {
+    const code = registeration.voucher_code;
+    dispatch(fetchVoucherCode({ code }));
+  };
+
   const setQuantity = (qty, point) => {
     let currentStream = [...data];
     console.log(currentStream, "<==== before");
     currentStream = currentStream.map((item, indx) => {
       if (indx === point) {
+        if (qty === 0) {
+          removeElement(point);
+        }
         return { ...item, quantity: qty };
       }
       return item;
@@ -126,7 +148,7 @@ const CartItem = ({
     console.log(currentStream, "<=== updated");
     setData(currentStream);
   };
-
+  console.log(voucherbycode, "code");
   return (
     <div className="cartItem1">
       <div className="cartItemHeader">
@@ -173,10 +195,7 @@ const CartItem = ({
                 <td>
                   <div className="btnSection1">
                     <button
-                      onClick={() =>
-                        // setSingleOrderQuantity(singleOrderQuantity - 1,index)
-                        setQuantity(data.quantity - 1, index)
-                      }
+                      onClick={() => setQuantity(data.quantity - 1, index)}
                     >
                       -
                     </button>
@@ -184,10 +203,7 @@ const CartItem = ({
                       <span> {data.quantity} </span>
                     </p>
                     <button
-                      onClick={() =>
-                        // setSingleOrderQuantity(singleOrderQuantity + 1, index)
-                        setQuantity(data.quantity + 1, index)
-                      }
+                      onClick={() => setQuantity(data.quantity + 1, index)}
                     >
                       +
                     </button>
@@ -198,32 +214,9 @@ const CartItem = ({
                     <ImCross />
                   </button>
                 </td>
-                <td>{calculateTotalPrice(data.item_price1, data.quantity)}$</td>
+                <td>{calculateTotalPrice(data.item_price2, data.quantity)}$</td>
               </tr>
             </tbody>
-            // <div className="cartItemDetail row">
-            //   <div className="col-sm-5">
-            //     <img
-            //       src={
-            //         "http://154.12.253.133:5000/assets/" +
-            //         data.item_main_picture_url_thumb
-            //       }
-            //       alt=""
-            //     />
-            //   </div>
-            //   <div className="col-sm-4 cartItemDetailsub">
-            //     <h4>{data.item_name}</h4>
-            //     <h5>{data.item_code}</h5>
-            //     <h3>{data.item_cost}</h3>
-            //     <h5>{data.item_department_code}</h5>
-            //     <h6>{data.item_hot_deal}</h6>
-            //     <h5>{data.item_price1}</h5>
-            //     <h5>{data.item_price2}</h5>
-            //     <button onClick={() => quantity[index] - 1}>-</button>
-            //     <p>{quantity[index]}Qty</p>
-            //     <button onClick={() => quantity[index] + 1}>+</button>
-            //   </div>
-            // </div>
           ))}
         </table>
       </div>
@@ -238,21 +231,43 @@ const CartItem = ({
         </div>
         <div className="col-sm-3">
           <input
-            value={"Discount 00$"}
+            value={
+              voucherbycode === undefined
+                ? ""
+                : voucherbycode.discount === undefined
+                ? ""
+                : `discount ${
+                    voucherbycode.discount ? voucherbycode.discount : "00"
+                  }$`
+            }
             onChange={handleChange}
-            placeholder="Add Voucher"
+            placeholder="Discount"
             name="voucher_code"
           ></input>
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-3">
+          <input
+            // value={`discount ${
+            //   voucherbycode.discount ? voucherbycode.discount : "00"
+            // }$`}
+            // onChange={handleChange}
+            placeholder="Discount"
+            name="voucher_code"
+          ></input>
+        </div>
+        <div className="col-sm-3">
           <input
             value={voucher_code}
             onChange={handleChange}
             placeholder="Add Voucher"
             name="voucher_code"
-            style={{ width: "500px" }}
           ></input>
-          <button className="checkOutBtn" onClick={submit}>
+          <button className="checkOutBtn" onClick={handleApplyVoucherCode}>
+            Apply Voucher
+          </button>
+        </div>
+        <div>
+          <button className="checkOutBtn1" onClick={submit}>
             Check Out
           </button>
         </div>

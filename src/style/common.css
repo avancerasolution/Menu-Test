@@ -755,7 +755,7 @@ select {
 }
 
 .tableContent {
-  margin: 100px 14px !important;
+  margin: 100px 0px !important;
 }
 
 .header {
@@ -893,7 +893,7 @@ td {
 
 .cartItem1 input {
   width: 230px;
-  margin: 0 40px;
+  margin: 0 -16px;
 }
 
 .checkoutBtn {
@@ -981,14 +981,15 @@ tr {
 }
 
 .checkOutBtn {
-
   cursor: pointer;
   background-color: #530000;
   border: none;
   padding: 18px;
   position: relative;
-  right: 40px;
+  /* right: 40px; */
   color: white;
+  top: -2px;
+  left: 15px;
 }
 
 .btnSection1 {
@@ -1014,4 +1015,17 @@ tr {
 
 .orderDetail td {
   text-align: center;
+}
+
+
+.checkOutBtn1 {
+  border: none;
+  background-color: #530000;
+  color: white;
+
+  padding: 20px;
+  float: right;
+  padding: 23px 111px;
+  margin: 53px;
+  font-size: 16px;
 }

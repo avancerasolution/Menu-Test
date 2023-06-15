@@ -9,6 +9,7 @@ import { checkOutreducer } from './reducer/checkoutreducer';
 import orderreducer from './reducer/orderreducer';
 import orderDetailReducer from './reducer/orderDetailReducer';
 import aboutReducer from './reducer/aboutReducer';
+import voucherCodeSlice from './reducer/voucherbycode';
 
 export const store = configureStore({
     reducer: {
@@ -21,7 +22,8 @@ export const store = configureStore({
         checkcout: checkOutreducer,
         order: orderreducer,
         orderdetail: orderDetailReducer,
-        about: aboutReducer
+        about: aboutReducer,
+        vouchercode: voucherCodeSlice
 
     },
 })
