@@ -24,13 +24,14 @@ const CartItem = ({
   const { message, error } = useSelector((state) => state.checkcout);
   const { voucherbycode } = useSelector((state) => state.vouchercode);
   const [data, setData] = useState([]);
+  const [Total, setTotal] = useState();
 
   const items = JSON.parse(localStorage.getItem("items"));
 
   //isk o useeffect m wrap karo wrna yeh bar baar chalta rahega, bhot ziada masley h , aik sitting m nahi hoga properly.
   const cart = [];
 
-  for (var i = 0; i < items.length; i++) {
+  for (var i = 0; i < items?.length; i++) {
     cart.push({
       item_id: items[i].item_id ? items[i].item_id : <></>,
       qty: items[i].quantity ? items[i].quantity : <></>,
@@ -106,14 +107,21 @@ const CartItem = ({
 
     return Math.round(subtotal);
   };
-  // const calculateTotalPrice = (price, quantity) => {
-  //   const taxRate = 0.13; // 13% tax rate
-  //   const subtotal = price * quantity;
-  //   const taxAmount = subtotal * taxRate;
-  //   const totalPrice = subtotal + taxAmount;
 
-  //   return Math.round(totalPrice);
-  // };
+  const totalAmount = function (total) {
+    var total = 0;
+    for (var i = 0; i < data?.length; i++) {
+      total = total + data[i].item_price1;
+    }
+    setTotal(total);
+    console.log(Total);
+    return total;
+  };
+
+  useEffect(() => {
+    totalAmount();
+  });
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -148,7 +156,47 @@ const CartItem = ({
     console.log(currentStream, "<=== updated");
     setData(currentStream);
   };
-  console.log(voucherbycode, "code");
+  var totalPrice = data.reduce(
+    (acc, obj) => acc + obj.item_price2 * obj.quantity,
+    0
+  );
+
+  // const calculatesTotalPrice = () => {
+  //   const tax = 1.13;
+  //   const totalAfterTax = 100 * tax;
+  //   console.log(totalAfterTax, "afeddddd");
+
+  //   const discount = voucherbycode?.discount ? voucherbycode.discount : 1;
+  //   const calculatedDiscount = (totalAfterTax / discount) * 100;
+
+  //   console.log(calculatedDiscount, "fff");
+  //   const discountPrice = (totalAfterTax * discount) / 100;
+  //   const datassss = totalAfterTax - discountPrice;
+
+  //   const afterCalculated = discountPrice - totalAfterTax;
+  //   console.log(
+  //     afterCalculated,
+  //     "datstdftadftsafdysagfdsagdjkhsajkjdkljsakldjksl"
+  //   );
+
+  //   console.log(afterCalculated, "aftertax");
+
+  //   return Math.round(afterCalculated);
+  // };
+  function calculateFinalPrice(price) {
+    const taxPercentage = 13;
+    const discountPercentage = voucherbycode?.discount
+      ? voucherbycode.discount
+      : 0;
+
+    const totalPriceWithTax = price * (1 + taxPercentage / 100);
+    const finalPrice = totalPriceWithTax * (1 - discountPercentage / 100);
+    return Math.round(finalPrice);
+  }
+
+  useEffect(() => {
+    calculateFinalPrice();
+  });
   return (
     <div className="cartItem1">
       <div className="cartItemHeader">
@@ -171,7 +219,7 @@ const CartItem = ({
               <th>Total Price</th>
             </tr>
           </thead>
-          {data.map((data, index) => (
+          {data?.map((data, index) => (
             <tbody>
               <tr>
                 <td>
@@ -247,10 +295,8 @@ const CartItem = ({
         </div>
         <div className="col-sm-3">
           <input
-            // value={`discount ${
-            //   voucherbycode.discount ? voucherbycode.discount : "00"
-            // }$`}
-            // onChange={handleChange}
+            value={` totalPrice ${calculateFinalPrice(totalPrice)}`}
+            onChange={handleChange}
             placeholder="Discount"
             name="voucher_code"
           ></input>

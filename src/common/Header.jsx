@@ -51,7 +51,7 @@ const Header = ({
   }, [dispatch, error, messages, navigate]);
   const items = JSON.parse(localStorage.getItem("items"));
 
-  const totalValue = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalValue = items?.reduce((sum, item) => sum + item.quantity, 0);
   setorderCount(totalValue);
   useEffect(() => {
     localStorage.setItem("totalValue", JSON.stringify(totalValue));
