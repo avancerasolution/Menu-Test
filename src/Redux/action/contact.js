@@ -1,8 +1,8 @@
 import axios from "axios";
 import { server } from "../store";
 
-const to = "muhammadfaizraza48@gmail.com"
-export const contact = ({ message, email, subject }) => async (dispatch) => {
+const email = "muhammad.faiz@avancerasolutions.com"
+export const contact = ({ message, to, subject }) => async (dispatch) => {
 
     try {
         dispatch({

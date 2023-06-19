@@ -10,12 +10,12 @@ const Contact = ({ isAuthenticated }) => {
   const { messages, error } = useSelector((state) => state.contact);
 
   const [message, setMessage] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("Subject ");
+  const [to, setEmail] = useState("");
+  const subject = "subject";
   const submit = async (event) => {
     event.preventDefault();
     if (isAuthenticated) {
-      await dispatch(contact({ message, email, subject }));
+      await dispatch(contact({ message, to, subject }));
       navigate("/");
     } else {
       toast.error("Please Login to Access This Resource");
@@ -51,7 +51,7 @@ const Contact = ({ isAuthenticated }) => {
           <input
             type="email"
             placeholder="Email"
-            value={email}
+            value={to}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -68,12 +68,6 @@ const Contact = ({ isAuthenticated }) => {
             Submit
           </button>
         </form>
-        {/* <motion.div className='FormBorder'>
-  <motion.div>
-
-    <img src={Burger} alt='burger'></img>
-  </motion.div>
-   </motion.div>    */}
       </section>
     </>
   );

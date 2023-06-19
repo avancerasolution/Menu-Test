@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchOrderDetail } from "../Redux/action/orderDetail";
-import Moment from "react-moment";
+import { toast } from "react-hot-toast";
+
 const OrderDetail = ({ id }) => {
   const dispatch = useDispatch();
   const { orderdetail, loading, error } = useSelector(
@@ -12,6 +13,16 @@ const OrderDetail = ({ id }) => {
     dispatch(fetchOrderDetail({ id }));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    if (loading) {
+    }
+
+    if (error) {
+      toast.error(error);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, loading]);
   return (
     <div className="orderDetail">
       <div>

@@ -14,7 +14,7 @@ import Signup from "./component/Signup";
 import { loadUser } from "./Redux/action/user";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import SideBar from "./common/SideBar";
+
 import CartItem from "./component/CartItem";
 import Profile from "./component/Profile";
 
@@ -67,6 +67,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/myprofile" element={<Profile user={user} />} />
+
         </Routes>
         <Footer />
       </BrowserRouter>

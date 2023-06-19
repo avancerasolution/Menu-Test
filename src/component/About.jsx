@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 function About() {
   const dispatch = useDispatch();
   const { about, error } = useSelector((state) => state.about);
-  console.log(about);
+
   useEffect(() => {
     dispatch(fetchAbout());
   }, [dispatch]);

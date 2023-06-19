@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrder } from "../Redux/action/order";
-import Button from "react-bootstrap/Button";
+
 import Modal from "react-bootstrap/Modal";
 import OrderDetail from "../common/OrderDetail";
+import { toast } from "react-hot-toast";
 const Profile = ({ user }) => {
   const dispatch = useDispatch();
   const [showDetail, setShowDetail] = useState();
@@ -18,7 +19,15 @@ const Profile = ({ user }) => {
     await setShowDetail(id);
     setModalShow(true);
   };
-  console.log(order, "test");
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
+
   return (
     <div className="container-fluid tableContent">
       <div>
@@ -30,7 +39,10 @@ const Profile = ({ user }) => {
             <th>Action</th>
           </thead>
 
-          {order &&
+          {loading ? (
+            <></>
+          ) : (
+            order &&
             order.result &&
             order.result.map((data) => (
               <tbody>
@@ -43,7 +55,8 @@ const Profile = ({ user }) => {
                   </button>
                 </td>
               </tbody>
-            ))}
+            ))
+          )}
         </table>
       </div>
       <Modal

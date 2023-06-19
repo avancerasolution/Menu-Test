@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BsCartDash } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
+// import global stats
 const Cart = ({
   setorderCount,
   orderCount,
@@ -13,13 +13,14 @@ const Cart = ({
   singleOrderQuantity,
   setSingleOrderQuantity,
 }) => {
+  // get data from state
   const { state } = useLocation();
   const { data } = state;
 
-  const [quantityCount, setquantityCount] = useState(0);
-  const [update, setUpdate] = useState([]);
+  // get data from localstorage
   const items = JSON.parse(localStorage.getItem("items"));
 
+  //add to cart function
   const handleAddtoCart = (item, singleOrderQuantity) => {
     if (isAuthenticated) {
       const existingItem = items.find(
@@ -56,31 +57,10 @@ const Cart = ({
     }
   };
 
-  // const handleAddtoCart = (data, singleOrderQuantity) => {
-  //   const i = items.findIndex((e) => e.item_id === data.item_id);
-  //   console.log(i)
-  //   if (i.length === -1) {
-  //     alert("matched");
-  //
-  //   }
-  //   const item = [...items];
-  //   const updatedData = item.map((i, e) => {
-  //     if (i.item_id === data.item_id) {
-  //       i.quantity += singleOrderQuantity;
-
-  //       setCartItems([...item]);
-  //       alert("nomatched");
-  //       return i;
-  //     }
-  //     return i;
-  //   });
-  // };
-  if (quantityCount < 0) {
-    setorderCount(singleOrderQuantity);
-  }
   if (singleOrderQuantity < 1) {
     setSingleOrderQuantity(1);
   }
+  //price calculation
   const calculateTotalPrice = (price, quantity) => {
     const taxRate = 0.13; // 13% tax rate
     const subtotal = price * quantity;
@@ -89,20 +69,16 @@ const Cart = ({
 
     return totalPrice;
   };
+  //set default quantity
   useEffect(() => {
     setSingleOrderQuantity(1);
   }, []);
-
+  //set data on localstorage
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(cartItems));
   }, [cartItems, setSingleOrderQuantity]);
   return (
-    <div
-      onClick={() => {
-        console.log(cartItems, "<==== items cart");
-      }}
-      className="cartItem container "
-    >
+    <div className="cartItem container ">
       <Toaster />
       <div className="row">
         <div className="col-sm-6">

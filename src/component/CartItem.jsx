@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { checkout } from "../Redux/action/checkout";
 import { useNavigate } from "react-router-dom";
 import { ImCross } from "react-icons/im";
-import { BsCartDash } from "react-icons/bs";
 import { fetchVoucherCode } from "../Redux/action/vouchercode";
 
 const CartItem = ({
@@ -20,7 +18,7 @@ const CartItem = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [voucher_code, setvoucher_code] = useState();
+
   const { message, error } = useSelector((state) => state.checkcout);
   const { voucherbycode } = useSelector((state) => state.vouchercode);
   const [data, setData] = useState([]);
@@ -28,7 +26,6 @@ const CartItem = ({
 
   const items = JSON.parse(localStorage.getItem("items"));
 
-  //isk o useeffect m wrap karo wrna yeh bar baar chalta rahega, bhot ziada masley h , aik sitting m nahi hoga properly.
   const cart = [];
 
   for (var i = 0; i < items?.length; i++) {
@@ -161,28 +158,6 @@ const CartItem = ({
     0
   );
 
-  // const calculatesTotalPrice = () => {
-  //   const tax = 1.13;
-  //   const totalAfterTax = 100 * tax;
-  //   console.log(totalAfterTax, "afeddddd");
-
-  //   const discount = voucherbycode?.discount ? voucherbycode.discount : 1;
-  //   const calculatedDiscount = (totalAfterTax / discount) * 100;
-
-  //   console.log(calculatedDiscount, "fff");
-  //   const discountPrice = (totalAfterTax * discount) / 100;
-  //   const datassss = totalAfterTax - discountPrice;
-
-  //   const afterCalculated = discountPrice - totalAfterTax;
-  //   console.log(
-  //     afterCalculated,
-  //     "datstdftadftsafdysagfdsagdjkhsajkjdkljsakldjksl"
-  //   );
-
-  //   console.log(afterCalculated, "aftertax");
-
-  //   return Math.round(afterCalculated);
-  // };
   function calculateFinalPrice(price) {
     const taxPercentage = 13;
     const discountPercentage = voucherbycode?.discount
@@ -303,7 +278,6 @@ const CartItem = ({
         </div>
         <div className="col-sm-3">
           <input
-            value={voucher_code}
             onChange={handleChange}
             placeholder="Add Voucher"
             name="voucher_code"
