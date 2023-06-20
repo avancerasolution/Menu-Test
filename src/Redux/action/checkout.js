@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "../store";
+
 import Cookies from "js-cookie";
 
 export const checkout = (formData) => async (dispatch) => {
@@ -9,7 +9,7 @@ export const checkout = (formData) => async (dispatch) => {
             type: "checkout",
         });
 
-        const { data } = await axios.post(`${server}/transaction`,
+        const { data } = await axios.post(`${window.env.API_URL}/transaction`,
 
             formData
             , {

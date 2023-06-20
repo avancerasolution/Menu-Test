@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "../store";
+
 import Cookies from "js-cookie";
 export const signup = ({ first_name, last_name, main_email, password }) => async (dispatch) => {
 
@@ -8,7 +8,7 @@ export const signup = ({ first_name, last_name, main_email, password }) => async
             type: "signup",
         });
 
-        const { data } = await axios.post(`${server}/customer`, {
+        const { data } = await axios.post(`${window.env.API_URL}/customer`, {
 
             first_name, last_name, main_email, password
         }, {

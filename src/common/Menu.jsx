@@ -59,9 +59,7 @@ function Menu() {
                 key={item._id}
               >
                 <img
-                  src={
-                    "http://154.12.253.133:5000/assets/" + item.main_picture_url
-                  }
+                  src={window.env.ASSETS_URL + item.main_picture_url}
                   alt=""
                 />
                 {item.category_code}
@@ -79,8 +77,7 @@ function Menu() {
                     <Card.Img
                       variant="top"
                       src={
-                        "http://154.12.253.133:5000/assets/" +
-                        data.item_main_picture_url_thumb
+                        window.env.ASSETS_URL + data.item_main_picture_url_thumb
                       }
                     />
                     <Card.Body>
@@ -121,7 +118,7 @@ function Menu() {
                       <Card.Img
                         variant="top"
                         src={
-                          "http://154.12.253.133:5000/assets/" +
+                          window.env.ASSETS_URL +
                           data.item_main_picture_url_thumb
                         }
                       />

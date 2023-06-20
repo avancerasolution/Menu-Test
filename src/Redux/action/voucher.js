@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { fetchVoucherStart, fetchVoucherSuccess, fetchVoucherFailure } from '../reducer/voucherReducer';
-import { server } from '../store';
+
 
 export const fetchVoucher = () => async (dispatch) => {
     dispatch(fetchVoucherStart());
 
     try {
-        const response = await axios.get(`${server}/voucher`)
+        const response = await axios.get(`${window.env.API_URL}/voucher`)
 
         const data = await response.data.result;
         dispatch(fetchVoucherSuccess(data));

@@ -16,8 +16,7 @@ const Header = ({
   orderCount,
   isAuthenticated,
   user,
-  showCartItem,
-  setShowCartItem,
+
   setorderCount,
 }) => {
   const dispatch = useDispatch();

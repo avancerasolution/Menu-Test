@@ -28,4 +28,3 @@ export const store = configureStore({
     },
 })
 
-export const server = "http://154.12.253.133:5000/api";

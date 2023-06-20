@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "../store";
+
 
 const email = "muhammad.faiz@avancerasolutions.com"
 export const contact = ({ message, to, subject }) => async (dispatch) => {
@@ -9,7 +9,7 @@ export const contact = ({ message, to, subject }) => async (dispatch) => {
             type: "contact",
         });
 
-        const { data } = await axios.post(`${server}/contactUs`, {
+        const { data } = await axios.post(`${window.env.API_URL}/contactUs`, {
 
             message, email, subject, to
         }, {

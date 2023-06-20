@@ -202,7 +202,7 @@ const CartItem = ({
                     <div>
                       <img
                         src={
-                          "http://154.12.253.133:5000/assets/" +
+                          window.env.ASSETS_URL +
                           data.item_main_picture_url_thumb
                         }
                         alt=""

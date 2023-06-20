@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "../store";
+
 import Cookies from "js-cookie";
 export const loadUser = () => async (dispatch) => {
     const token = Cookies.get("Token")
@@ -9,7 +9,7 @@ export const loadUser = () => async (dispatch) => {
             type: "loadUserRequest",
         });
 
-        const { data } = await axios.get(`${server}/auth/me`, {
+        const { data } = await axios.get(`${window.env.API_URL}/auth/me`, {
             headers: {
                 "Content-Type": "application/json",
                 'Authorization': `${token}`
@@ -43,7 +43,7 @@ export const login = ({ email, password }) => async (dispatch) => {
             type: "loginRequest",
         });
 
-        const { data } = await axios.post(`${server}/auth/loggingIn`, {
+        const { data } = await axios.post(`${window.env.API_URL}/auth/loggingIn`, {
 
             email,
             password,
