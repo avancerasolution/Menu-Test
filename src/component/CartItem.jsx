@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
@@ -173,17 +173,17 @@ const CartItem = ({
     calculateFinalPrice();
   });
   return (
+<Fragment>
+    <div className="container-fluid abt">
+          <div className="row">
+            <div className="col-sm-12">
+              <h2  onClick={() => { console.log(data, "<=== data");  }}>Shopping Cart</h2>
+            </div>
+          </div>
+        </div>
     <div className="cartItem1">
-      <div className="cartItemHeader">
-        <h1
-          onClick={() => {
-            console.log(data, "<=== data");
-          }}
-        >
-          Shopping Cart
-        </h1>
-      </div>
-      <div>
+
+      <div className="restable">
         <table>
           <thead>
             <tr>
@@ -214,7 +214,7 @@ const CartItem = ({
                     </div>
                   </div>
                 </td>
-                <td>{data.item_price2}</td>
+                <td className="cross2">{data.item_price2}</td>
                 <td>
                   <div className="btnSection1">
                     <button
@@ -232,12 +232,12 @@ const CartItem = ({
                     </button>
                   </div>
                 </td>
-                <td>
+                <td className="cross"> 
                   <button onClick={() => removeElement(index, data.quantity)}>
                     <ImCross />
                   </button>
                 </td>
-                <td>{calculateTotalPrice(data.item_price2, data.quantity)}$</td>
+                <td className="cross">{calculateTotalPrice(data.item_price2, data.quantity)}$</td>
               </tr>
             </tbody>
           ))}
@@ -293,6 +293,8 @@ const CartItem = ({
         </div>
       </div>
     </div>
+
+    </Fragment>
   );
 };
 

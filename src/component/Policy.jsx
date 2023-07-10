@@ -3,6 +3,17 @@ import React from "react";
 function PolicyPage() {
   return (
     <div className="policy">
+
+<div className="container-fluid abt">
+          <div className="row">
+            <div className="col-sm-12">
+              <h2>Privacy Policy</h2>
+            </div>
+          </div>
+        </div>
+
+
+      <div className="container">
       <div className="row">
         <div className="col-sm-12">
           <h1>Privacy Policy</h1>
@@ -76,6 +87,8 @@ function PolicyPage() {
             please contact us at privacy@burgerjoint.com.
           </p>
         </div>
+      </div>
+
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -11,6 +11,11 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { loadUser } from "../Redux/action/user";
 import { logout } from "../Redux/action/signup";
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Header = ({
   orderCount,
@@ -56,38 +61,27 @@ const Header = ({
     localStorage.setItem("totalValue", JSON.stringify(totalValue));
   }, [orderCount, totalValue]);
   return (
-    <header>
-      <nav>
-        <div>
-          <Link to="/">
-            <img src={logo} alt="" />
-          </Link>
-        </div>
 
-        <div>
-          <Link to="/about">
-            <p>About Us</p>
-          </Link>
-          <Link to="/contact">
-            <p>Contact Us</p>
-          </Link>
-          <Link to="/policy">
-            <p>Policy</p>
-          </Link>
-          <div className="headerIcons">
+    <Fragment>
+      
+    <header>
+         <Navbar expand="lg" className="bg-body-tertiary">
+
+        <Navbar.Brand> <Link to="/"><img src={logo} alt="" /> </Link></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="end">
+          <Nav.Link><Link to="/about">About Us</Link></Nav.Link>
+            <Nav.Link><Link to="/contact"> Contact Us </Link></Nav.Link>
+            <Nav.Link ><Link to="/policy">Policy </Link></Nav.Link>
+
+            <div className="headerIcons">
             {isAuthenticated ? (
-              <Link to="/cartItem">
-                {" "}
-                <p>
-                  <span> {orderCount} </span>
-                  <AiOutlineShoppingCart />
-                </p>
+                <Link to="/cartItem">{" "}
+                <p> <span> {orderCount} </span> <AiOutlineShoppingCart /> </p>
               </Link>
             ) : (
-              <p onClick={handleAuthenticated}>
-                <span> {totalValue} </span>
-                <AiOutlineShoppingCart />
-              </p>
+              <p onClick={handleAuthenticated}> <span> {totalValue} </span>  <AiOutlineShoppingCart /></p>
             )}
 
             {!isAuthenticated ? (
@@ -121,9 +115,17 @@ const Header = ({
               </div>
             )}
           </div>
-        </div>
-      </nav>
+          </Nav>
+        </Navbar.Collapse>
+
+
+
+    </Navbar>
+    
     </header>
+
+
+    </Fragment>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrder } from "../Redux/action/order";
 
@@ -29,8 +29,21 @@ const Profile = ({ user }) => {
   }, [error]);
 
   return (
+
+    <Fragment>
+      
+<div className="container-fluid abt">
+          <div className="row">
+            <div className="col-sm-12">
+              <h2>Checkout </h2>
+            </div>
+          </div>
+        </div>
     <div className="container-fluid tableContent">
-      <div>
+
+
+
+      <div className="tabres">
         <table>
           <thead>
             <th>Transaction id</th>
@@ -79,6 +92,9 @@ const Profile = ({ user }) => {
         </Modal.Footer>
       </Modal>
     </div>
+
+    </Fragment>
+
   );
 };
 

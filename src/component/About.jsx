@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import aboutimg from "../assets/about1.jpeg";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAbout } from "../Redux/action/about";
@@ -22,6 +22,15 @@ function About() {
   }
 
   return (
+    <Fragment>
+    <div className="container-fluid abt">
+          <div className="row">
+            <div className="col-sm-12">
+              <h2>About Us</h2>
+            </div>
+          </div>
+        </div>
+
     <div className="container about">
       {about && (
         <div className="row">
@@ -52,6 +61,7 @@ function About() {
         </div>
       )}
     </div>
+    </Fragment>
   );
 }
 

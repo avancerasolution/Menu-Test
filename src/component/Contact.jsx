@@ -3,6 +3,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { contact } from "../Redux/action/contact";
 import { useNavigate } from "react-router-dom";
+import Loaction from "../assets/map.png"
 
 const Contact = ({ isAuthenticated }) => {
   const navigate = useNavigate();
@@ -37,37 +38,35 @@ const Contact = ({ isAuthenticated }) => {
   return (
     <>
       <section className="contact">
-        <Toaster />
-        <form>
-          <h2>Contact Us</h2>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-12">
+              <h2>Contact Us</h2>
+            </div>
+          </div>
+        </div>
+        <div className="container">
+          <div className="row">
+            
 
-          <input
-            type="text"
-            placeholder="Name"
-            //   value={name}
-            //   onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={to}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+            <div className="col-sm-6">
+            <Toaster />
+              <form>
+                <h2>Contact Us</h2>
+                <input  type="text" placeholder="Name" required />
+                <input  type="email" placeholder="Email" value={to} onChange={(e) => setEmail(e.target.value)} required />
+                <textarea placeholder="Message..." cols="30" rows="10" value={message} required onChange={(e) => setMessage(e.target.value)} ></textarea>
+                <button type="submit" onClick={submit}>Submit</button>
+              </form>
+              
+            </div>
 
-          <textarea
-            placeholder="Message..."
-            cols="30"
-            rows="10"
-            value={message}
-            required
-            onChange={(e) => setMessage(e.target.value)}
-          ></textarea>
-          <button type="submit" onClick={submit}>
-            Submit
-          </button>
-        </form>
+            <div className="col-sm-6 maps">
+              <img src={Loaction} alt="map" width={100}/>
+            </div>
+          </div>
+        </div>
+        
       </section>
     </>
   );

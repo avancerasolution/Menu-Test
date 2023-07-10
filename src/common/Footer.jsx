@@ -74,16 +74,16 @@ const Footer = () => {
                 </div>
                 <ul>
                   <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/"  onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); }}>Home</Link>
                   </li>
                   <li>
-                    <Link to="/about">About</Link>
+                    <Link to="/about"  onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); }}>About</Link>
                   </li>
                   <li>
-                    <Link to="/policy">Policy</Link>
+                    <Link to="/policy"  onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); }}>Policy</Link>
                   </li>
                   <li>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/contact"  onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); }}> Contact</Link>
                   </li>
                 </ul>
               </div>

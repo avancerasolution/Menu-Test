@@ -35,7 +35,18 @@ const Signup = () => {
 
   return (
     <section className="contact login">
-      <Toaster />
+<div className="container-fluid abt">
+          <div className="row">
+            <div className="col-sm-12">
+              <h2>Sign Up </h2>
+            </div>
+          </div>
+        </div>
+
+      <div className="container loginform">
+        <div className="row">
+          <div className="col-sm-6">
+          <Toaster />
       <form>
         <h2>Sign Up </h2>
         <input
@@ -68,6 +79,11 @@ const Signup = () => {
           Sign Up
         </button>
       </form>
+          </div>
+        </div>
+      </div>
+
+      
       {/* <motion.div className='FormBorder'>
 <motion.div>
 

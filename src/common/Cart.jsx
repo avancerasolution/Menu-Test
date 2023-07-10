@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { BsCartDash } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
@@ -78,6 +78,16 @@ const Cart = ({
     localStorage.setItem("items", JSON.stringify(cartItems));
   }, [cartItems, setSingleOrderQuantity]);
   return (
+<Fragment>
+    <div className="container-fluid abt">
+          <div className="row">
+            <div className="col-sm-12">
+              <h2>{data.item_name}</h2>
+            </div>
+          </div>
+        </div>
+
+
     <div className="cartItem container ">
       <Toaster />
       <div className="row">
@@ -87,7 +97,7 @@ const Cart = ({
             alt=""
           />
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-6 texts">
           <h2>{data.item_name}</h2>
           <h6>
             Price:
@@ -100,6 +110,7 @@ const Cart = ({
           <p>{data.item_short_description}</p>
           <p>{data.item_description_html}</p>
           <div className="btnSection">
+            <span className="qtty">
             <button
               onClick={() => setSingleOrderQuantity(singleOrderQuantity - 1)}
             >
@@ -113,14 +124,21 @@ const Cart = ({
             >
               +
             </button>
-            <button onClick={() => handleAddtoCart(data, singleOrderQuantity)}>
+            </span>
+
+            Total {calculateTotalPrice(data.item_price1, singleOrderQuantity)}
+            
+          </div>
+          <button onClick={() => handleAddtoCart(data, singleOrderQuantity)} className="cartbtn">
               <BsCartDash /> Add to Cart
             </button>
-          </div>
-          Total {calculateTotalPrice(data.item_price1, singleOrderQuantity)}
+            <></>
+          
         </div>
       </div>
     </div>
+
+    </Fragment>
   );
 };
 

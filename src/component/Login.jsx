@@ -35,31 +35,34 @@ const Login = () => {
   return (
     <section className="contact login">
       <Toaster />
-      <form>
-        <h2>Login </h2>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <div className="container-fluid abt">
+          <div className="row">
+            <div className="col-sm-12">
+              <h2>Login </h2>
+            </div>
+          </div>
+        </div>
+        <div className="container loginform">
+          <div className="row">
+            <div className="col-sm-6">
+              <h2>Login Now</h2>
+            <form>
+              <input  type="email"  placeholder="Email" value={email}  onChange={(e) => setEmail(e.target.value)}  />
+              <input  type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+              <Link to="/signup">
+                {" "}
+                <p>Don`t Have An Account </p>{" "}
+              </Link>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Link to="/signup">
-          {" "}
-          <p>Don`t Have An Account </p>{" "}
-        </Link>
-
-        <button type="submit" onClick={submit}>
-          Login
-        </button>
-      </form>
+              <button type="submit" onClick={submit}>
+                Login
+              </button>
+              </form>
+            </div>
+          </div>
+      
+      </div>
     </section>
   );
 };
