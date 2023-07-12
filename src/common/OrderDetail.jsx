@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchOrderDetail } from "../Redux/action/orderDetail";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const OrderDetail = ({ id }) => {
   const dispatch = useDispatch();

@@ -3,53 +3,71 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadUser, login } from "../Redux/action/user";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { clearError, clearMessage } from "../Redux/reducer/userReducer";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { messages, error } = useSelector((state) => state.auth);
+  const [data, setdata] = useState({
+    email: "",
+    password: "",
+  });
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const handlechange = (event) => {
+    setdata({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const { message, error } = useSelector((state) => state.auth);
 
   const submit = async (event) => {
     event.preventDefault();
-    await dispatch(login({ email, password }));
+    await dispatch(login(data));
     dispatch(loadUser());
-    navigate("/");
   };
   useEffect(() => {
-    if (messages) {
-      toast.success(messages);
-      dispatch({ type: "clearMessage" });
-      dispatch({ type: "emptyState" });
+    if (message) {
+      dispatch(clearMessage());
+      navigate("/");
+      toast.success(message);
     }
     if (error) {
       toast.error(error);
-      dispatch({ type: "clearError" });
+      dispatch(clearError());
     }
-  }, [dispatch, navigate, error, messages]);
+  }, [dispatch, navigate, error, message]);
 
   return (
     <section className="contact login">
-      <Toaster />
-
       <div className="container-fluid abt">
-          <div className="row">
-            <div className="col-sm-12">
-              <h2>Login </h2>
-            </div>
+        <div className="row">
+          <div className="col-sm-12">
+            <h2>Login </h2>
           </div>
         </div>
-        <div className="container loginform">
-          <div className="row">
-            <div className="col-sm-6">
-              <h2>Login Now</h2>
+      </div>
+      <div className="container loginform">
+        <div className="row">
+          <div className="col-sm-6">
+            <h2>Login Now</h2>
             <form>
-              <input  type="email"  placeholder="Email" value={email}  onChange={(e) => setEmail(e.target.value)}  />
-              <input  type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+              <input
+                type="email"
+                placeholder="Email"
+                value={data.email}
+                name="email"
+                onChange={handlechange}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={data.password}
+                name="password"
+                onChange={handlechange}
+              />
               <Link to="/signup">
                 {" "}
                 <p>Don`t Have An Account </p>{" "}
@@ -58,10 +76,9 @@ const Login = () => {
               <button type="submit" onClick={submit}>
                 Login
               </button>
-              </form>
-            </div>
+            </form>
           </div>
-      
+        </div>
       </div>
     </section>
   );

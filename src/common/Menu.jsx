@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMenuData } from "../Redux/action/menu";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { fetchCategory } from "../Redux/action/category";
-import banner2 from "../assets/banner2.jpg";
 
 function Menu() {
   const dispatch = useDispatch();
@@ -42,7 +41,7 @@ function Menu() {
 
   return (
     <>
-      <Toaster />
+      =
       <div className="menuHeader">
         <h2>Menu</h2>
         <h1>Most Popular Items</h1>
@@ -87,7 +86,6 @@ function Menu() {
                       <p>
                         Price:{" "}
                         <span>
-                          {" "}
                           <del> ${data.item_price2}</del>${data.item_price1}
                         </span>
                       </p>

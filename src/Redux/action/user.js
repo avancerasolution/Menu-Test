@@ -1,5 +1,7 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import { loginRequest, loginSuccess, loginFail } from '../reducer/userReducer';
 import Cookies from "js-cookie";
 export const loadUser = () => async (dispatch) => {
     const token = Cookies.get("Token")
@@ -29,41 +31,45 @@ export const loadUser = () => async (dispatch) => {
     }
 };
 
-export const login = ({ email, password }) => async (dispatch) => {
 
 
-    try {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            }
+
+
+
+
+
+
+export const login = createAsyncThunk(
+    'login',
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(loginRequest()); // Dispatch the start action
+
+            // Make your API request here, e.g., using fetch or axios
+            const response = await axios.post(`${window.env.API_URL}/auth/loggingIn`,
+                data
+            );
+
+            console.log(response.data, "uper")
+            thunkAPI.dispatch(loginSuccess(response.data));
+            console.log(response.data, "neeche")
+            Cookies.set("Token", response.data.tokens.token);
+
+
+
+
+
+
+
+
+
+        } catch (error) {
+
+            thunkAPI.dispatch(loginFail(error.response.data.message)); // Dispatch the failure action
+
+            throw error;
+
         }
-
-        dispatch({
-            type: "loginRequest",
-        });
-
-        const { data } = await axios.post(`${window.env.API_URL}/auth/loggingIn`, {
-
-            email,
-            password,
-        }, config
-        );
-        Cookies.set("Token", data.tokens.token);
-        dispatch({
-            type: "loginSuccess",
-            payload: "Login Successfully"
-        });
-    } catch (error) {
-        dispatch({
-            type: "loginFail",
-            payload: error,
-        });
     }
-};
-
-
-
-
-
+);
 

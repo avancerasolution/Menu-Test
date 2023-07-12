@@ -7,27 +7,18 @@ import { RiAccountBoxFill } from "react-icons/ri";
 
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { loadUser } from "../Redux/action/user";
 import { logout } from "../Redux/action/signup";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
-const Header = ({
-  orderCount,
-  isAuthenticated,
-  user,
-
-  setorderCount,
-}) => {
+const Header = ({ orderCount, user, setorderCount }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { messages, error } = useSelector((state) => state.signup);
-
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const handleLogout = async (event) => {
     event.preventDefault();
     await dispatch(logout());
@@ -61,70 +52,79 @@ const Header = ({
     localStorage.setItem("totalValue", JSON.stringify(totalValue));
   }, [orderCount, totalValue]);
   return (
-
     <Fragment>
-      
-    <header>
-         <Navbar expand="lg" className="bg-body-tertiary">
+      <header>
+        <Navbar expand="lg" className="bg-body-tertiary">
+          <Navbar.Brand>
+            {" "}
+            <Link to="/">
+              <img src={logo} alt="" />{" "}
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="end">
+              <Nav.Link>
+                <Link to="/about">About Us</Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/contact"> Contact Us </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/policy">Policy </Link>
+              </Nav.Link>
 
-        <Navbar.Brand> <Link to="/"><img src={logo} alt="" /> </Link></Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="end">
-          <Nav.Link><Link to="/about">About Us</Link></Nav.Link>
-            <Nav.Link><Link to="/contact"> Contact Us </Link></Nav.Link>
-            <Nav.Link ><Link to="/policy">Policy </Link></Nav.Link>
-
-            <div className="headerIcons">
-            {isAuthenticated ? (
-                <Link to="/cartItem">{" "}
-                <p> <span> {orderCount} </span> <AiOutlineShoppingCart /> </p>
-              </Link>
-            ) : (
-              <p onClick={handleAuthenticated}> <span> {totalValue} </span>  <AiOutlineShoppingCart /></p>
-            )}
-
-            {!isAuthenticated ? (
-              <>
-                {" "}
-                <Link to="/login">
-                  <p>
-                    <AiOutlineLogin />
-                  </p>
-                </Link>
-                <Link to="/signup">
-                  <p>
-                    <RiAccountBoxFill />
-                  </p>
-                </Link>
-              </>
-            ) : (
-              <div className="dropdown">
-                <p>{user.first_name}</p>
-
-                <span>
-                  <IoMdArrowDropdownCircle />
-                </span>
-
-                <div class="dropdown-content">
-                  <Link to="/myprofile">
-                    <p>My Profile</p>
+              <div className="headerIcons">
+                {isAuthenticated ? (
+                  <Link to="/cartItem">
+                    {" "}
+                    <p>
+                      {" "}
+                      <span> {orderCount} </span> <AiOutlineShoppingCart />{" "}
+                    </p>
                   </Link>
-                  <p onClick={handleLogout}>Logout</p>
-                </div>
+                ) : (
+                  <p onClick={handleAuthenticated}>
+                    {" "}
+                    <span> {totalValue} </span> <AiOutlineShoppingCart />
+                  </p>
+                )}
+
+                {!isAuthenticated ? (
+                  <>
+                    {" "}
+                    <Link to="/login">
+                      <p>
+                        <AiOutlineLogin />
+                      </p>
+                    </Link>
+                    <Link to="/signup">
+                      <p>
+                        <RiAccountBoxFill />
+                      </p>
+                    </Link>
+                  </>
+                ) : (
+                  <div className="dropdown">
+                    <p>{user?.first_name}</p>
+
+                    <span>
+                      <IoMdArrowDropdownCircle />
+                    </span>
+
+                    <div class="dropdown-content">
+                      <Link to="/myprofile">
+                        <p>My Profile</p>
+                      </Link>
+                      <p onClick={handleLogout}>Logout</p>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          </Nav>
-        </Navbar.Collapse>
-
-
-
-    </Navbar>
-    
-    </header>
-
-
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </header>
     </Fragment>
   );
 };

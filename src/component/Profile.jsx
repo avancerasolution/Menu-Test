@@ -4,7 +4,7 @@ import { fetchOrder } from "../Redux/action/order";
 
 import Modal from "react-bootstrap/Modal";
 import OrderDetail from "../common/OrderDetail";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 const Profile = ({ user }) => {
   const dispatch = useDispatch();
   const [showDetail, setShowDetail] = useState();
@@ -29,72 +29,65 @@ const Profile = ({ user }) => {
   }, [error]);
 
   return (
-
     <Fragment>
-      
-<div className="container-fluid abt">
-          <div className="row">
-            <div className="col-sm-12">
-              <h2>Checkout </h2>
-            </div>
+      <div className="container-fluid abt">
+        <div className="row">
+          <div className="col-sm-12">
+            <h2>Checkout </h2>
           </div>
         </div>
-    <div className="container-fluid tableContent">
-
-
-
-      <div className="tabres">
-        <table>
-          <thead>
-            <th>Transaction id</th>
-            <th>Date</th>
-
-            <th>Action</th>
-          </thead>
-
-          {loading ? (
-            <></>
-          ) : (
-            order &&
-            order.result &&
-            order.result.map((data) => (
-              <tbody>
-                <td>{data.transaction_id}</td>
-                <td>{data.createdAt.split("T")[0]}</td>
-
-                <td>
-                  <button onClick={() => handleModal(data.order_id)}>
-                    View Detail
-                  </button>
-                </td>
-              </tbody>
-            ))
-          )}
-        </table>
       </div>
-      <Modal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        size="xl"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            <h4>Order Details</h4>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <OrderDetail id={showDetail} />
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={() => setModalShow(false)}>Close</button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+      <div className="container-fluid tableContent">
+        <div className="tabres">
+          <table>
+            <thead>
+              <th>Transaction id</th>
+              <th>Date</th>
 
+              <th>Action</th>
+            </thead>
+
+            {loading ? (
+              <></>
+            ) : (
+              order &&
+              order.result &&
+              order.result.map((data) => (
+                <tbody>
+                  <td>{data.transaction_id}</td>
+                  <td>{data.createdAt.split("T")[0]}</td>
+
+                  <td>
+                    <button onClick={() => handleModal(data.order_id)}>
+                      View Detail
+                    </button>
+                  </td>
+                </tbody>
+              ))
+            )}
+          </table>
+        </div>
+        <Modal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          size="xl"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              <h4>Order Details</h4>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <OrderDetail id={showDetail} />
+          </Modal.Body>
+          <Modal.Footer>
+            <button onClick={() => setModalShow(false)}>Close</button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     </Fragment>
-
   );
 };
 

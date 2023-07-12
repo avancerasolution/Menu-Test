@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { contact } from "../Redux/action/contact";
 import { useNavigate } from "react-router-dom";
-import Loaction from "../assets/map.png"
+import Loaction from "../assets/map.png";
 
 const Contact = ({ isAuthenticated }) => {
   const navigate = useNavigate();
@@ -47,26 +47,36 @@ const Contact = ({ isAuthenticated }) => {
         </div>
         <div className="container">
           <div className="row">
-            
-
             <div className="col-sm-6">
-            <Toaster />
               <form>
                 <h2>Contact Us</h2>
-                <input  type="text" placeholder="Name" required />
-                <input  type="email" placeholder="Email" value={to} onChange={(e) => setEmail(e.target.value)} required />
-                <textarea placeholder="Message..." cols="30" rows="10" value={message} required onChange={(e) => setMessage(e.target.value)} ></textarea>
-                <button type="submit" onClick={submit}>Submit</button>
+                <input type="text" placeholder="Name" required />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={to}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <textarea
+                  placeholder="Message..."
+                  cols="30"
+                  rows="10"
+                  value={message}
+                  required
+                  onChange={(e) => setMessage(e.target.value)}
+                ></textarea>
+                <button type="submit" onClick={submit}>
+                  Submit
+                </button>
               </form>
-              
             </div>
 
             <div className="col-sm-6 maps">
-              <img src={Loaction} alt="map" width={100}/>
+              <img src={Loaction} alt="map" width={100} />
             </div>
           </div>
         </div>
-        
       </section>
     </>
   );

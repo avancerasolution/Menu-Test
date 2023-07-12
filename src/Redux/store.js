@@ -1,30 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { authReducer } from "./reducer/userReducer";
-import { signupreducer } from './reducer/signUpReducer';
-import menuReducer from './reducer/menuReducer';
-import categoryReducer from './reducer/categoryReducer';
-import { contactreducer } from './reducer/contactReducer';
-import voucherReducer from './reducer/voucherReducer';
-import { checkOutreducer } from './reducer/checkoutreducer';
-import orderreducer from './reducer/orderreducer';
-import orderDetailReducer from './reducer/orderDetailReducer';
-import aboutReducer from './reducer/aboutReducer';
-import voucherCodeSlice from './reducer/voucherbycode';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore } from 'redux-persist';
+import { persistedReducer } from './configStore';
 
-export const store = configureStore({
-    reducer: {
-        auth: authReducer,
-        signup: signupreducer,
-        menu: menuReducer,
-        category: categoryReducer,
-        contact: contactreducer,
-        voucher: voucherReducer,
-        checkcout: checkOutreducer,
-        order: orderreducer,
-        orderdetail: orderDetailReducer,
-        about: aboutReducer,
-        vouchercode: voucherCodeSlice
 
-    },
-})
+const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false
+        }),
+});
 
+export default store;
+export const persistor = persistStore(store);
