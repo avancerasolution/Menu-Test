@@ -3,7 +3,7 @@ import authReducer from "./reducer/userReducer";
 import signUpReducer from './reducer/signUpReducer';
 import menuReducer from './reducer/menuReducer';
 import categoryReducer from './reducer/categoryReducer';
-import { contactreducer } from './reducer/contactReducer';
+import contactReducer, { contactreducer } from './reducer/contactReducer';
 import voucherReducer from './reducer/voucherReducer';
 import { checkOutreducer } from './reducer/checkoutreducer';
 import orderreducer from './reducer/orderreducer';
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
     signup: signUpReducer,
     menu: menuReducer,
     category: categoryReducer,
-    contact: contactreducer,
+    contact: contactReducer,
     voucher: voucherReducer,
     checkcout: checkOutreducer,
     order: orderreducer,

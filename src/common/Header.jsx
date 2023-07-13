@@ -105,20 +105,16 @@ const Header = ({ orderCount, user, setorderCount }) => {
                     </Link>
                   </>
                 ) : (
-                  <div className="dropdown">
-                    <p>{user?.first_name}</p>
-
+                  <>
                     <span>
                       <IoMdArrowDropdownCircle />
                     </span>
 
-                    <div class="dropdown-content">
-                      <Link to="/myprofile">
-                        <p>My Profile</p>
-                      </Link>
-                      <p onClick={handleLogout}>Logout</p>
-                    </div>
-                  </div>
+                    <Link to="/myprofile">
+                      <button>My Profile</button>
+                    </Link>
+                    <button onClick={handleLogout}>Logout</button>
+                  </>
                 )}
               </div>
             </Nav>

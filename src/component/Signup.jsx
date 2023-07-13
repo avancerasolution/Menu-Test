@@ -10,6 +10,7 @@ import {
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [confirmPassword, setConfirmPassword] = useState();
   const { message, error } = useSelector((state) => state.signup);
 
   const [data, setdata] = useState({
@@ -28,7 +29,16 @@ const Signup = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    await dispatch(signup(data));
+
+    const emailregex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!emailregex.test(data.main_email)) {
+      toast.error("Invalid Email Address");
+    } else if (confirmPassword !== data.password) {
+      toast.error("Password and Confirm Password is Not Matched");
+    } else {
+      await dispatch(signup(data));
+    }
   };
   useEffect(() => {
     if (message) {
@@ -84,6 +94,13 @@ const Signup = () => {
                 onChange={handlechange}
                 name="password"
               />
+              <input
+                value={confirmPassword}
+                type="password"
+                placeholder="Confirm Password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                name="password"
+              />
 
               <button type="submit" onClick={submit}>
                 Sign Up
@@ -92,13 +109,6 @@ const Signup = () => {
           </div>
         </div>
       </div>
-
-      {/* <motion.div className='FormBorder'>
-<motion.div>
-
-<img src={Burger} alt='burger'></img>
-</motion.div>
-</motion.div>    */}
     </section>
   );
 };

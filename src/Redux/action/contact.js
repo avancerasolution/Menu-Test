@@ -1,37 +1,39 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-
-const email = "muhammad.faiz@avancerasolutions.com"
-export const contact = ({ message, to, subject }) => async (dispatch) => {
-
-    try {
-        dispatch({
-            type: "contact",
-        });
-
-        const { data } = await axios.post(`${window.env.API_URL}/contactUs`, {
-
-            message, email, subject, to
-        }, {
+import { contactFail, contactRequest, contactSuccess } from "../reducer/contactReducer";
 
 
 
-        },
-        );
+export const contact = createAsyncThunk(
+    'contact',
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(contactRequest()); // Dispatch the start action
 
-        dispatch({
-            type: "contactRequest",
-            payload: data,
-        });
-    } catch (error) {
-        dispatch({
-            type: "contactFail",
-            payload: error.response.data.message,
-        });
+            // Make your API request here, e.g., using fetch or axios
+            const response = await axios.post(`${window.env.API_URL}/contactUs`,
+                data
+            );
+
+            console.log(response.data, "uper")
+            thunkAPI.dispatch(contactSuccess(response.data));
+            console.log(response.data, "neeche")
+
+
+
+
+
+
+
+
+
+
+        } catch (error) {
+
+            thunkAPI.dispatch(contactFail(error.response.data.message)); // Dispatch the failure action
+
+            throw error;
+
+        }
     }
-};
-
-
-
-
-
+);

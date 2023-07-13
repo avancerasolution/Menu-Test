@@ -50,7 +50,6 @@ function App() {
     });
   }, [dispatch, error, message]);
 
-  console.log(window.env.API_URL)
   return (
     <div className="App">
       <BrowserRouter>

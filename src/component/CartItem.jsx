@@ -150,7 +150,7 @@ const CartItem = ({
       }
       return item;
     });
-    console.log(currentStream, "<=== updated");
+
     setData(currentStream);
   };
   var totalPrice = data.reduce(
