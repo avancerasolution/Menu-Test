@@ -1,8 +1,7 @@
 import axios from "axios";
-
-import { signUpRequest, signUpSuccess, signUpFail } from '../reducer/signUpReducer';
-import Cookies from "js-cookie";
+import { signUpRequest, signUpSuccess, signUpFail, } from '../reducer/signUpReducer';
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { logoutRequest, logoutSuccess } from "../reducer/userReducer";
 
 
 
@@ -18,10 +17,8 @@ export const signup = createAsyncThunk(
                 data
             );
 
-            console.log(response.data, "uper")
             thunkAPI.dispatch(signUpSuccess(response.data));
-            console.log(response.data)
-            Cookies.set("token", response.data.token)
+
 
 
 
@@ -44,22 +41,32 @@ export const signup = createAsyncThunk(
 
 
 
-export const logout = () => async (dispatch) => {
-    try {
-        dispatch({
-            type: "logout",
-        });
 
-        Cookies.remove('Token')
+export const logout = createAsyncThunk(
+    'signup',
+    async (_, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(logoutRequest()); // Dispatch the start action
 
-        dispatch({
-            type: "logoutSuccess",
+            // Make your API request here, e.g., using fetch or axios
 
-        });
-    } catch (error) {
-        dispatch({
-            type: "logoutFail",
-            payload: "Logout Successfully",
-        });
+
+
+            thunkAPI.dispatch(logoutSuccess());
+
+
+
+
+
+
+
+
+
+
+        } catch (error) {
+
+            console.log(error)
+
+        }
     }
-};
+);

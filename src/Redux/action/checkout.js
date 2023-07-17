@@ -1,40 +1,49 @@
 import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { checkOutFail, checkOutRequest, checkOutSuccess } from "../reducer/checkoutreducer";
 
-import Cookies from "js-cookie";
 
-export const checkout = (formData) => async (dispatch) => {
-    const token = Cookies.get("Token")
-    try {
-        dispatch({
-            type: "checkout",
-        });
 
-        const { data } = await axios.post(`${window.env.API_URL}/transaction`,
+export const checkout = createAsyncThunk(
+    'checkout',
+    async ({ formData }, thunkAPI) => {
+        try {
+            console.log(formData, "data")
+            const token = thunkAPI.getState().auth.token
+            thunkAPI.dispatch(checkOutRequest()); // Dispatch the start action
 
-            formData
-            , {
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `${token}`
+            // Make your API request here, e.g., using fetch or axios
+            const response = await axios.post(`${window.env.API_URL}/transaction`,
+                formData
+                , {
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': `${token}`
+                    },
+
+
                 },
+            );
+            console.log(formData, "data")
+            console.log(response.data, "uper")
+            thunkAPI.dispatch(checkOutSuccess(response.data));
+            console.log(response.data, "neeche")
 
 
-            },
-        );
 
-        dispatch({
-            type: "checkOutRequest",
-            payload: data,
-        });
-    } catch (error) {
-        dispatch({
-            type: "checkOutFail",
-            payload: error.response.data.error,
-        });
+
+
+
+
+
+
+
+        } catch (error) {
+
+            thunkAPI.dispatch(checkOutFail(error.response.data.message)); // Dispatch the failure action
+
+            throw error;
+
+        }
     }
-};
-
-
-
-
-
+);

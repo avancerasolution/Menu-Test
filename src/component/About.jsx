@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from "react";
-import aboutimg from "../assets/about1.jpeg";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAbout } from "../Redux/action/about";
 

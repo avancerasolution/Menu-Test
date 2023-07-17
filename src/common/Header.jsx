@@ -9,7 +9,7 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { loadUser } from "../Redux/action/user";
+
 import { logout } from "../Redux/action/signup";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -17,13 +17,13 @@ import Navbar from "react-bootstrap/Navbar";
 const Header = ({ orderCount, user, setorderCount }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { messages, error } = useSelector((state) => state.signup);
-  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const isAuthenticated = useSelector((state) => state.auth.token);
+  console.log(isAuthenticated, "dd");
   const handleLogout = async (event) => {
     event.preventDefault();
     await dispatch(logout());
     setorderCount(0);
-    dispatch(loadUser());
 
     navigate("/");
   };
@@ -32,18 +32,6 @@ const Header = ({ orderCount, user, setorderCount }) => {
     toast("Please Login to access this resource");
   };
 
-  useEffect(() => {
-    if (messages) {
-      toast.success(messages);
-      dispatch({ type: "clearMessage" });
-      dispatch({ type: "emptyState" });
-      navigate("/");
-    }
-    if (error) {
-      toast.error(error);
-      dispatch({ type: "clearError" });
-    }
-  }, [dispatch, error, messages, navigate]);
   const items = JSON.parse(localStorage.getItem("items"));
 
   const totalValue = items?.reduce((sum, item) => sum + item.quantity, 0);

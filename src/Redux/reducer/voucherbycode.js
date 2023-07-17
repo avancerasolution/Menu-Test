@@ -5,6 +5,7 @@ const voucherCodeSlice = createSlice({
     initialState: {
         voucherbycode: undefined,
         loading: false,
+        message: null,
         error: null,
     },
     reducers: {
@@ -16,11 +17,18 @@ const voucherCodeSlice = createSlice({
             state.voucherbycode = action.payload;
             state.loading = false;
             state.error = null;
+            state.message = "Voucher is available"
         },
         fetchVoucherCodeFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
+        clearVoucherError: (state) => {
+            state.error = null;
+
+
+
+        }
     },
 });
 
@@ -28,6 +36,7 @@ export const {
     fetchVoucherCodeStart,
     fetchVoucherCodeSuccess,
     fetchVoucherCodeFailure,
+    clearVoucherError
 } = voucherCodeSlice.actions;
 
 export default voucherCodeSlice.reducer;

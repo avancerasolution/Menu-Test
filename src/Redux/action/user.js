@@ -50,10 +50,10 @@ export const login = createAsyncThunk(
                 data
             );
 
-            console.log(response.data, "uper")
+
             thunkAPI.dispatch(loginSuccess(response.data));
-            console.log(response.data, "neeche")
-            Cookies.set("Token", response.data.tokens.token);
+
+         
 
 
 

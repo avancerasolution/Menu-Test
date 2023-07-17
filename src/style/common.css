@@ -1088,7 +1088,8 @@ select {
 }
 
 .tableContent thead {
-  background-color: #850000;
+  background-color: #212529;
+  ;
 
   border-radius: 20px !important;
 

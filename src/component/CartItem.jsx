@@ -6,24 +6,25 @@ import { checkout } from "../Redux/action/checkout";
 import { useNavigate } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 import { fetchVoucherCode } from "../Redux/action/vouchercode";
+import { clearError, clearMessage } from "../Redux/reducer/checkoutreducer";
+import { clearVoucherError } from "../Redux/reducer/voucherbycode";
 
 const CartItem = ({
   setCartItems,
-  cartItems,
+
   orderCount,
   setorderCount,
-  user,
-  singleOrderQuantity,
-  setSingleOrderQuantity,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { message, error } = useSelector((state) => state.checkcout);
   const { voucherbycode } = useSelector((state) => state.vouchercode);
+  const voucherError = useSelector((state) => state.vouchercode.error);
+  const voucherMessage = useSelector((state) => state.vouchercode.message);
   const [data, setData] = useState([]);
   const [Total, setTotal] = useState();
-
+  const userId = useSelector((state) => state.auth.data);
   const items = JSON.parse(localStorage.getItem("items"));
 
   const cart = [];
@@ -60,18 +61,17 @@ const CartItem = ({
 
   const submit = async (event) => {
     event.preventDefault();
-    const userId = user.customer_id;
-    registeration.customer_id = user.customer_id;
+
     try {
       const register = {
         voucher_code: registeration.voucher_code,
         cart: cart,
         voucher_no: 1,
+        customer_id: userId.user.customer_id,
         t_date: "12-12-12",
         unit_price: 99.99,
         total_price: 10.05,
         temp_record: 105,
-        customer_id: userId,
         session_id_temp: "this is session id",
         discount: 0.5,
         tax: 99.99,
@@ -81,11 +81,10 @@ const CartItem = ({
         register.voucher_code = registeration.voucher_code;
       }
       const formData = { ...register };
-      console.log(formData, "datataata");
+
       setrecords([...records, formData]);
-      await dispatch(checkout(formData));
-      toast.success("Order Submitted Successfully");
-      navigate("/myprofile");
+
+      await dispatch(checkout({ formData }));
     } catch (error) {
       toast.error(error);
     }
@@ -106,7 +105,6 @@ const CartItem = ({
   };
 
   const totalAmount = function (total) {
-    var total = 0;
     for (var i = 0; i < data?.length; i++) {
       total = total + data[i].item_price1;
     }
@@ -122,13 +120,31 @@ const CartItem = ({
   useEffect(() => {
     if (error) {
       toast.error(error);
-      dispatch({ type: "clearError" });
+      dispatch(clearError());
     }
-
+    if (voucherError) {
+      toast.error(voucherError);
+      dispatch(clearVoucherError());
+    }
     if (message) {
       toast.success(message);
+      dispatch(clearMessage());
+      setorderCount(0);
+      localStorage.removeItem("items");
+      navigate("/myprofile");
     }
-  }, [dispatch, error, message]);
+    if (voucherMessage) {
+      toast.success(voucherMessage);
+    }
+  }, [
+    dispatch,
+    error,
+    message,
+    navigate,
+    setorderCount,
+    voucherError,
+    voucherMessage,
+  ]);
   useEffect(() => {
     setData(items);
   }, []);
@@ -140,7 +156,7 @@ const CartItem = ({
 
   const setQuantity = (qty, point) => {
     let currentStream = [...data];
-    console.log(currentStream, "<==== before");
+
     currentStream = currentStream.map((item, indx) => {
       if (indx === point) {
         if (qty === 0) {
@@ -153,12 +169,15 @@ const CartItem = ({
 
     setData(currentStream);
   };
-  var totalPrice = data.reduce(
+  var totalPrice = data?.reduce(
     (acc, obj) => acc + obj.item_price2 * obj.quantity,
     0
   );
 
   function calculateFinalPrice(price) {
+    if (price === undefined) {
+      return 0;
+    }
     const taxPercentage = 13;
     const discountPercentage = voucherbycode?.discount
       ? voucherbycode.discount
@@ -277,9 +296,9 @@ const CartItem = ({
           </div>
           <div className="col-sm-3">
             <input
-              value={` totalPrice ${calculateFinalPrice(totalPrice)}`}
+              value={` Total Price ${calculateFinalPrice(totalPrice)}`}
               onChange={handleChange}
-              placeholder="Discount"
+              placeholder="Discount 0"
               name="voucher_code"
             ></input>
           </div>

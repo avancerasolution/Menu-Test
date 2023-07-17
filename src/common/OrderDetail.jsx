@@ -6,11 +6,10 @@ import { toast } from "react-toastify";
 
 const OrderDetail = ({ id }) => {
   const dispatch = useDispatch();
-  const { orderdetail, loading, error } = useSelector(
-    (state) => state.orderdetail
-  );
+  const { data, loading, error } = useSelector((state) => state.orderdetail);
+  console.log(data);
   useEffect(() => {
-    dispatch(fetchOrderDetail({ id }));
+    dispatch(fetchOrderDetail(id));
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -29,7 +28,6 @@ const OrderDetail = ({ id }) => {
         <table>
           <thead>
             <th>Voucher Number</th>
-            <th>Internal Notes</th>
 
             <th>Quantity</th>
             <th>Transaction Id</th>
@@ -40,11 +38,10 @@ const OrderDetail = ({ id }) => {
           </thead>
 
           <tbody>
-            {orderdetail &&
-              orderdetail.map((data) => (
+            {data &&
+              data?.map((data) => (
                 <tr>
                   <td>{data.voucher_no}</td>
-                  <td>{data.internal_notes}</td>
 
                   <td>{data.qty}</td>
                   <td>{data.transaction_id}</td>

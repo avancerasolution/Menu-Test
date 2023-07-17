@@ -8,6 +8,7 @@ export const contact = createAsyncThunk(
     'contact',
     async (data, thunkAPI) => {
         try {
+
             thunkAPI.dispatch(contactRequest()); // Dispatch the start action
 
             // Make your API request here, e.g., using fetch or axios

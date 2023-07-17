@@ -8,12 +8,12 @@ import Header from "./common/Header";
 import Footer from "./common/Footer";
 import Policy from "./component/Policy";
 import Cart from "./common/Cart";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Login from "./component/Login";
 import Signup from "./component/Signup";
-import { loadUser } from "./Redux/action/user";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+
+
+import { useSelector } from "react-redux";
 import CartItem from "./component/CartItem";
 import Profile from "./component/Profile";
 
@@ -26,29 +26,14 @@ function App() {
   ]);
   const [quan, setQuan] = useState([]);
   const [singleOrderQuantity, setSingleOrderQuantity] = useState(1);
-  const dispatch = useDispatch();
-  const { error, message, data, isAuthenticated } = useSelector(
+
+  const { data, isAuthenticated } = useSelector(
     (state) => state.auth
   );
 
-  useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch]);
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
-    dispatch({
-      type: "clearError",
-    });
-    if (message) {
-      toast.success(message);
-    }
-    dispatch({
-      type: "clearMessage",
-    });
-  }, [dispatch, error, message]);
+
+
 
   return (
     <div className="App">

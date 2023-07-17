@@ -35,7 +35,7 @@ const Contact = ({ isAuthenticated }) => {
   useEffect(() => {
     if (messages) {
       toast.success(messages);
-      navigate("/");
+
       dispatch(clearContactMessage());
     }
     if (error) {

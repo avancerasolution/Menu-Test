@@ -1,32 +1,56 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
+
+
+
+const initialState = {
+    loading: false,
+    error: null,
+    order: [],
+
+
+};
+
 const OrderSlice = createSlice({
-    name: 'order',
-    initialState: {
-        order: null,
-        loading: false,
-        error: null,
-    },
+    name: 'contact',
+    initialState,
     reducers: {
-        fetchOrderStart: (state) => {
+        fetchOrderStart(state) {
             state.loading = true;
             state.error = null;
+
+
         },
-        fetchOrderSuccess: (state, action) => {
-            state.order = action.payload;
+
+        fetchOrderSuccess(state, action) {
             state.loading = false;
-            state.error = null;
+            state.isAuthenticated = true
+            state.order = action.payload
+
+
+
         },
-        fetchOrderFailure: (state, action) => {
+
+
+        fetchOrderFailure(state, action) {
             state.loading = false;
             state.error = action.payload;
+
         },
+
+        clearOrderError(state) {
+            state.error = null;
+
+
+        },
+
     },
 });
-
 export const {
     fetchOrderStart,
     fetchOrderSuccess,
+    clearOrderError,
     fetchOrderFailure,
 } = OrderSlice.actions;
 

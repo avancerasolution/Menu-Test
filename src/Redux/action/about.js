@@ -11,6 +11,6 @@ export const fetchAbout = () => async (dispatch) => {
         const data = await response.data;
         dispatch(fetchAboutSuccess(data));
     } catch (error) {
-        dispatch(fetchAboutFailure(error.message));
+        dispatch(fetchAboutFailure(error.response.message));
     }
 };

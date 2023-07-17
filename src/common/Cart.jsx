@@ -23,25 +23,29 @@ const Cart = ({
   //add to cart function
   const handleAddtoCart = (item, singleOrderQuantity) => {
     if (isAuthenticated) {
-      const existingItem = items.find(
+      const existingItem = items?.find(
         (cartItem) => cartItem.item_id === item.item_id
       );
 
       if (existingItem) {
         const updatedCartItems = cartItems.map((cartItem) => {
+          setorderCount(orderCount + cartItem.quantity);
           if (cartItem.item_id === item.item_id) {
             toast.success(
               `${singleOrderQuantity} ${data.item_name} is added in your cart`
             );
+
+            setorderCount(orderCount + cartItem.quantity);
             return {
               ...cartItem,
               quantity: cartItem.quantity + singleOrderQuantity,
             };
           }
-          setorderCount(orderCount + cartItem.quantity);
+
           return cartItem;
         });
         setCartItems(updatedCartItems);
+        setSingleOrderQuantity(1);
       } else {
         toast.success(
           `${singleOrderQuantity} ${data.item_name} is added in your cart`
@@ -62,17 +66,16 @@ const Cart = ({
   }
   //price calculation
   const calculateTotalPrice = (price, quantity) => {
-    const taxRate = 0.13; // 13% tax rate
     const subtotal = price * quantity;
-    const taxAmount = subtotal * taxRate;
-    const totalPrice = subtotal + taxAmount;
+
+    const totalPrice = subtotal;
 
     return totalPrice;
   };
   //set default quantity
   useEffect(() => {
     setSingleOrderQuantity(1);
-  }, []);
+  }, [setSingleOrderQuantity]);
   //set data on localstorage
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(cartItems));
@@ -100,11 +103,11 @@ const Cart = ({
             <h6>
               Price:
               <span>
-                <del> ${data.item_price2}</del> ${data.item_price1}
+                <del> ${data.item_price1}</del> ${data.item_price2}
               </span>
             </h6>
             <p>Deal No : {data.item_hot_deal}</p>
-            {/* <p>Category :{data.items_Category.category_code}</p> */}
+
             <p>{data.item_short_description}</p>
             <p>{data.item_description_html}</p>
             <div className="btnSection">
@@ -127,7 +130,7 @@ const Cart = ({
                   +
                 </button>
               </span>
-              Total {calculateTotalPrice(data.item_price1, singleOrderQuantity)}
+              Total {calculateTotalPrice(data.item_price2, singleOrderQuantity)}
             </div>
             <button
               onClick={() => handleAddtoCart(data, singleOrderQuantity)}

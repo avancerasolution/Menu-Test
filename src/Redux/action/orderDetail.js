@@ -1,23 +1,46 @@
 import axios from 'axios';
 import { fetchOrderDetailStart, fetchOrderDetailSuccess, fetchOrderDetailFailure } from '../reducer/orderDetailReducer';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import Cookies from 'js-cookie';
 
-export const fetchOrderDetail = ({ id }) => async (dispatch) => {
-    dispatch(fetchOrderDetailStart());
-    const token = Cookies.get("Token")
-    try {
-        const response = await axios.get(`${window.env.API_URL}/Transaction/order/${id}`, {
 
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `${token}`
-            },
 
-        })
-        const data = await response.data;
-        dispatch(fetchOrderDetailSuccess(data));
-    } catch (error) {
-        dispatch(fetchOrderDetailFailure(error.message));
+
+export const fetchOrderDetail = createAsyncThunk(
+    'order',
+    async (id, thunkAPI) => {
+        console.log(id, "chala")
+        try {
+            const token = thunkAPI.getState().auth.token
+            thunkAPI.dispatch(fetchOrderDetailStart()); // Dispatch the start action
+            const response = await axios.get(`${window.env.API_URL}/Transaction/order/${id}`, {
+
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `${token}`
+                },
+
+            })
+
+            console.log(response.data, "uper")
+            thunkAPI.dispatch(fetchOrderDetailSuccess(response.data));
+            console.log(response.data, "neeche")
+
+
+
+
+
+
+
+
+
+
+        } catch (error) {
+
+            thunkAPI.dispatch(fetchOrderDetailFailure(error.message));// Dispatch the failure action
+
+            throw error;
+
+        }
     }
-};
+);

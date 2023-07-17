@@ -47,20 +47,7 @@ const signupreducer = createSlice({
             state.isAuthenticated = false
             state.token = null
         },
-        logoutRequest(state) {
-            state.loading = true;
-        },
-        logoutSuccess(state, action) {
-            state.loading = false;
-            state.isAuthenticated = false;
-            state.message = action.payload;
-            state.data = null;
-        },
-        logoutFail(state, action) {
-            state.loading = false;
-            state.isAuthenticated = true;
-            state.error = action.payload;
-        },
+
         clearUserError(state) {
             state.error = null;
 

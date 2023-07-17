@@ -5,14 +5,17 @@ import { fetchOrder } from "../Redux/action/order";
 import Modal from "react-bootstrap/Modal";
 import OrderDetail from "../common/OrderDetail";
 import { toast } from "react-toastify";
+import { clearOrderError } from "../Redux/reducer/orderreducer";
 const Profile = ({ user }) => {
   const dispatch = useDispatch();
   const [showDetail, setShowDetail] = useState();
   const [modalShow, setModalShow] = useState(false);
   const { order, loading, error } = useSelector((state) => state.order);
-  const id = user && user.customer_id ? user.customer_id : "";
+  const { data } = useSelector((state) => state.auth);
+  const id = data?.user?.customer_id;
+  console.log(order, "order");
   useEffect(() => {
-    dispatch(fetchOrder({ id }));
+    dispatch(fetchOrder(id));
   }, [dispatch, id]);
 
   const handleModal = async (id) => {
@@ -23,6 +26,7 @@ const Profile = ({ user }) => {
   useEffect(() => {
     if (error) {
       toast.error(error);
+      dispatch(clearOrderError());
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,8 +55,7 @@ const Profile = ({ user }) => {
               <></>
             ) : (
               order &&
-              order.result &&
-              order.result.map((data) => (
+              order.map((data) => (
                 <tbody>
                   <td>{data.transaction_id}</td>
                   <td>{data.createdAt.split("T")[0]}</td>

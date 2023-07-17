@@ -1,26 +1,61 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const checkOutreducer = createReducer(
-    {},
-    {
-        checkOutRequest: (state) => {
+
+
+
+
+
+
+
+const initialState = {
+    loading: false,
+    message: null,
+    error: null,
+    data: {},
+
+
+};
+
+const checkOutReducer = createSlice({
+    name: 'checkout',
+    initialState,
+    reducers: {
+        checkOutRequest(state) {
             state.loading = true;
+            state.error = null;
+            state.message = null;
+
+
         },
-        checkOutSuccess: (state, action) => {
+
+        checkOutSuccess(state, action) {
             state.loading = false;
+            state.isAuthenticated = true
+            state.data = action.payload
+            state.message = "Your Order is Created successfully!"
 
-            state.message = action.payload;
+
 
         },
-        checkOutFail: (state, action) => {
+
+
+        checkOutFail(state, action) {
             state.loading = false;
             state.error = action.payload;
+
         },
 
-        clearError: (state) => {
+        clearError(state) {
             state.error = null;
+
+
         },
-        clearMessage: (state) => {
+        clearMessage(state) {
             state.message = null;
-        },
-    })
+        }
+    },
+});
+
+export const { checkOutRequest, checkOutSuccess, checkOutFail, clearError, clearMessage } = checkOutReducer.actions;
+
+export default checkOutReducer.reducer;
