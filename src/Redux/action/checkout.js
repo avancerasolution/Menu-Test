@@ -8,7 +8,7 @@ export const checkout = createAsyncThunk(
     'checkout',
     async ({ formData }, thunkAPI) => {
         try {
-            console.log(formData, "data")
+           
             const token = thunkAPI.getState().auth.token
             thunkAPI.dispatch(checkOutRequest()); // Dispatch the start action
 
@@ -24,10 +24,10 @@ export const checkout = createAsyncThunk(
 
                 },
             );
-            console.log(formData, "data")
-            console.log(response.data, "uper")
+         
+     
             thunkAPI.dispatch(checkOutSuccess(response.data));
-            console.log(response.data, "neeche")
+            
 
 
 

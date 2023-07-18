@@ -24,6 +24,7 @@ const rootReducer = combineReducers({
     orderdetail: orderDetailReducer,
     about: aboutReducer,
     vouchercode: voucherCodeSlice
+   
 })
 
 export default rootReducer
