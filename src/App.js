@@ -31,7 +31,7 @@ function App() {
     (state) => state.auth
   );
 
-
+  console.log(process.env, "dsadsada")
 
 
 

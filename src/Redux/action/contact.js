@@ -12,7 +12,7 @@ export const contact = createAsyncThunk(
             thunkAPI.dispatch(contactRequest()); // Dispatch the start action
 
             // Make your API request here, e.g., using fetch or axios
-            const response = await axios.post(`${window.env.API_URL}/contactUs`,
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/contactUs`,
                 data
             );
 

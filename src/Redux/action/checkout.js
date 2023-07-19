@@ -8,12 +8,12 @@ export const checkout = createAsyncThunk(
     'checkout',
     async ({ formData }, thunkAPI) => {
         try {
-           
+
             const token = thunkAPI.getState().auth.token
             thunkAPI.dispatch(checkOutRequest()); // Dispatch the start action
 
             // Make your API request here, e.g., using fetch or axios
-            const response = await axios.post(`${window.env.API_URL}/transaction`,
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/transaction`,
                 formData
                 , {
                     headers: {
@@ -24,10 +24,10 @@ export const checkout = createAsyncThunk(
 
                 },
             );
-         
-     
+
+
             thunkAPI.dispatch(checkOutSuccess(response.data));
-            
+
 
 
 

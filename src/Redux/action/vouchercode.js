@@ -13,7 +13,7 @@ export const fetchVoucherCode = createAsyncThunk(
             thunkAPI.dispatch(fetchVoucherCodeStart()); // Dispatch the start action
 
             // Make your API request here, e.g., using fetch or axios
-            const response = await axios.get(`${window.env.API_URL}/voucher/code/${code}`)
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/voucher/code/${code}`)
 
 
 

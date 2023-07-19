@@ -42,11 +42,11 @@ function About() {
                 ) : (
                   <img
                     src={
-                      window.env.ASSETS_URL + about.result.image ===
+                      process.env.REACT_APP_ASSET_URL + about.result.image ===
                       undefined ? (
                         <></>
                       ) : (
-                        window.env.ASSETS_URL + about.result.image
+                        process.env.REACT_APP_ASSET_URL + about.result.image
                       )
                     }
                     alt="Image"

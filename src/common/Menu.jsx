@@ -58,7 +58,7 @@ function Menu() {
                 key={item._id}
               >
                 <img
-                  src={window.env.ASSETS_URL + item.main_picture_url}
+                  src={process.env.REACT_APP_ASSET_URL + item.main_picture_url}
                   alt=""
                 />
                 {item.category_code}
@@ -76,7 +76,8 @@ function Menu() {
                     <Card.Img
                       variant="top"
                       src={
-                        window.env.ASSETS_URL + data.item_main_picture_url_thumb
+                        process.env.REACT_APP_ASSET_URL +
+                        data.item_main_picture_url_thumb
                       }
                     />
                     <Card.Body>
@@ -116,7 +117,7 @@ function Menu() {
                       <Card.Img
                         variant="top"
                         src={
-                          window.env.ASSETS_URL +
+                          process.env.REACT_APP_ASSET_URL +
                           data.item_main_picture_url_thumb
                         }
                       />

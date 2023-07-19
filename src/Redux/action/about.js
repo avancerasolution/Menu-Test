@@ -6,7 +6,7 @@ export const fetchAbout = () => async (dispatch) => {
     dispatch(fetchAboutStart());
 
     try {
-        const response = await axios.get(`${window.env.API_URL}/content/heading/about_us`)
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/content/heading/about_us`)
 
         const data = await response.data;
         dispatch(fetchAboutSuccess(data));

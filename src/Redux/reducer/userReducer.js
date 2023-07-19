@@ -22,7 +22,7 @@ const authReducer = createSlice({
             state.error = null;
             state.message = null;
             state.isAuthenticated = false
-            state.token = null
+            state.token = null  
 
         },
 

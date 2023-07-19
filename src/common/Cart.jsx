@@ -94,7 +94,10 @@ const Cart = ({
         <div className="row">
           <div className="col-sm-6">
             <img
-              src={window.env.ASSETS_URL + data.item_main_picture_url_thumb}
+              src={
+                process.env.REACT_APP_ASSET_URL +
+                data.item_main_picture_url_thumb
+              }
               alt=""
             />
           </div>

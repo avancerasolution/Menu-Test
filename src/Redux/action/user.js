@@ -11,7 +11,7 @@ export const loadUser = () => async (dispatch) => {
             type: "loadUserRequest",
         });
 
-        const { data } = await axios.get(`${window.env.API_URL}/auth/me`, {
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/me`, {
             headers: {
                 "Content-Type": "application/json",
                 'Authorization': `${token}`
@@ -46,14 +46,14 @@ export const login = createAsyncThunk(
             thunkAPI.dispatch(loginRequest()); // Dispatch the start action
 
             // Make your API request here, e.g., using fetch or axios
-            const response = await axios.post(`${window.env.API_URL}/auth/loggingIn`,
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/loggingIn`,
                 data
             );
 
 
             thunkAPI.dispatch(loginSuccess(response.data));
 
-         
+
 
 
 

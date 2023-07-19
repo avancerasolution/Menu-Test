@@ -226,7 +226,7 @@ const CartItem = ({
                       <div>
                         <img
                           src={
-                            window.env.ASSETS_URL +
+                            process.env.REACT_APP_ASSET_URL +
                             data.item_main_picture_url_thumb
                           }
                           alt=""

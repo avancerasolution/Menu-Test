@@ -13,7 +13,7 @@ export const fetchOrderDetail = createAsyncThunk(
         try {
             const token = thunkAPI.getState().auth.token
             thunkAPI.dispatch(fetchOrderDetailStart()); // Dispatch the start action
-            const response = await axios.get(`${window.env.API_URL}/Transaction/order/${id}`, {
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/Transaction/order/${id}`, {
 
                 headers: {
                     "Content-Type": "application/json",
