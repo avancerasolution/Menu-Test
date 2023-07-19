@@ -70,14 +70,14 @@ function Menu() {
         {!showAllData ? (
           <div className="row">
             {filteredData &&
-              filteredData.map((data) => (
-                <div className="col-sm-4 cards" key={data.id}>
+              filteredData.map((data) => {
+                return <div className="col-sm-4 cards" key={data.id}>
                   <Card style={{ width: "18rem" }} className="col-sm-3 ">
                     <Card.Img
                       variant="top"
                       src={
                         process.env.REACT_APP_ASSET_URL +
-                        data.item_main_picture_url_thumb
+                        data?.item_main_picture_url
                       }
                     />
                     <Card.Body>
@@ -105,7 +105,7 @@ function Menu() {
                     </Card.Body>
                   </Card>
                 </div>
-              ))}
+})}
           </div>
         ) : (
           <>
@@ -118,7 +118,7 @@ function Menu() {
                         variant="top"
                         src={
                           process.env.REACT_APP_ASSET_URL +
-                          data.item_main_picture_url_thumb
+                          data.item_main_picture_url
                         }
                       />
                       <Card.Body>
