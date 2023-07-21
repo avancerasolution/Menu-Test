@@ -61,7 +61,6 @@ const CartItem = ({
 
   const submit = async (event) => {
     event.preventDefault();
-
     try {
       const register = {
         voucher_code: registeration.voucher_code,
@@ -84,7 +83,7 @@ const CartItem = ({
 
       setrecords([...records, formData]);
 
-      await dispatch(checkout({ formData }));
+      await dispatch(checkout({ formData,navigate }));
     } catch (error) {
       toast.error(error);
     }
@@ -100,13 +99,12 @@ const CartItem = ({
 
   const calculateTotalPrice = (price, quantity) => {
     const subtotal = price * quantity;
-
-    return Math.round(subtotal);
+    return subtotal.toFixed(2);
   };
 
   const totalAmount = function (total) {
     for (var i = 0; i < data?.length; i++) {
-      total = total + data[i].item_price1;
+      total = total + data[i]?.item_price1;
     }
     setTotal(total);
     console.log(Total);
@@ -155,12 +153,17 @@ const CartItem = ({
   };
 
   const setQuantity = (qty, point) => {
+    console.log(qty,point,"<----")
+    if(qty<1){
+      return
+    }
     let currentStream = [...data];
 
     currentStream = currentStream.map((item, indx) => {
       if (indx === point) {
         if (qty === 0) {
           removeElement(point);
+          // return null
         }
         return { ...item, quantity: qty };
       }
@@ -170,7 +173,7 @@ const CartItem = ({
     setData(currentStream);
   };
   var totalPrice = data?.reduce(
-    (acc, obj) => acc + obj.item_price2 * obj.quantity,
+    (acc, obj) => acc + obj?.item_price2 * obj?.quantity,
     0
   );
 
@@ -185,7 +188,7 @@ const CartItem = ({
 
     const totalPriceWithTax = price * (1 + taxPercentage / 100);
     const finalPrice = totalPriceWithTax * (1 - discountPercentage / 100);
-    return Math.round(finalPrice);
+    return finalPrice.toFixed(2);
   }
 
   useEffect(() => {
@@ -215,7 +218,7 @@ const CartItem = ({
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Remove</th>
-                <th>Total Price</th>
+                <th>Sub Total</th>
               </tr>
             </thead>
             {data?.map((data, index) => (
@@ -227,42 +230,42 @@ const CartItem = ({
                         <img
                           src={
                             process.env.REACT_APP_ASSET_URL +
-                            data.item_main_picture_url
+                            data?.item_main_picture_url
                           }
                           alt=""
                         />
                       </div>
                       <div>
-                        <h2> {data.item_name} </h2>
-                        <h5>product code is {data.item_department_code}</h5>
+                        <h2> {data?.item_name} </h2>
+                        <h5>product code is {data?.item_department_code}</h5>
                       </div>
                     </div>
                   </td>
-                  <td className="cross2">{data.item_price2}</td>
+                  <td className="cross2">{data?.item_price2}</td>
                   <td>
                     <div className="btnSection1">
                       <button
-                        onClick={() => setQuantity(data.quantity - 1, index)}
+                        onClick={() => setQuantity(data?.quantity - 1, index)}
                       >
                         -
                       </button>
                       <p>
-                        <span> {data.quantity} </span>
+                        <span> {data?.quantity} </span>
                       </p>
                       <button
-                        onClick={() => setQuantity(data.quantity + 1, index)}
+                        onClick={() => setQuantity(data?.quantity + 1, index)}
                       >
                         +
                       </button>
                     </div>
                   </td>
                   <td className="cross">
-                    <button onClick={() => removeElement(index, data.quantity)}>
+                    <button onClick={() => removeElement(index, data?.quantity)}>
                       <ImCross />
                     </button>
                   </td>
                   <td className="cross">
-                    {calculateTotalPrice(data.item_price2, data.quantity)}$
+                    {calculateTotalPrice(data?.item_price2, data?.quantity)}$
                   </td>
                 </tr>
               </tbody>
@@ -296,7 +299,7 @@ const CartItem = ({
           </div>
           <div className="col-sm-3">
             <input
-              value={` Total Price ${calculateFinalPrice(totalPrice)}`}
+              value={` Total Price ${calculateFinalPrice(totalPrice)} $`}
               onChange={handleChange}
               placeholder="Discount 0"
               name="voucher_code"

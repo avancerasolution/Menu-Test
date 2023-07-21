@@ -25,9 +25,9 @@ const voucherCodeSlice = createSlice({
         },
         clearVoucherError: (state) => {
             state.error = null;
-
-
-
+        },
+        clearVoucherMessage: (state) => {
+            state.message = null;
         }
     },
 });
@@ -36,7 +36,8 @@ export const {
     fetchVoucherCodeStart,
     fetchVoucherCodeSuccess,
     fetchVoucherCodeFailure,
-    clearVoucherError
+    clearVoucherError,
+    clearVoucherMessage
 } = voucherCodeSlice.actions;
 
 export default voucherCodeSlice.reducer;

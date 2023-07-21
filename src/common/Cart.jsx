@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { BsCartDash } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -16,6 +17,9 @@ const Cart = ({
   // get data from state
   const { state } = useLocation();
   const { data } = state;
+  const cart= useSelector((state)=>state.cart.data);
+
+  console.log(cart,"<=== new cart")
 
   // get data from localstorage
   const items = JSON.parse(localStorage.getItem("items"));
@@ -26,7 +30,6 @@ const Cart = ({
       const existingItem = items?.find(
         (cartItem) => cartItem.item_id === item.item_id
       );
-
       if (existingItem) {
         const updatedCartItems = cartItems.map((cartItem) => {
           setorderCount(orderCount + cartItem.quantity);
@@ -34,7 +37,7 @@ const Cart = ({
             toast.success(
               `${singleOrderQuantity} ${data.item_name} is added in your cart`
             );
-
+            setSingleOrderQuantity(0)
             setorderCount(orderCount + cartItem.quantity);
             return {
               ...cartItem,
@@ -133,7 +136,7 @@ const Cart = ({
                   +
                 </button>
               </span>
-              Total {calculateTotalPrice(data.item_price2, singleOrderQuantity)}
+              Total {calculateTotalPrice(data.item_price2, singleOrderQuantity).toFixed(2)}
             </div>
             <button
               onClick={() => handleAddtoCart(data, singleOrderQuantity)}

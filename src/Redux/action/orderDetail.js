@@ -30,11 +30,6 @@ export const fetchOrderDetail = createAsyncThunk(
 
 
 
-
-
-
-
-
         } catch (error) {
 
             thunkAPI.dispatch(fetchOrderDetailFailure(error.message));// Dispatch the failure action

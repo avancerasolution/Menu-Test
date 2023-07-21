@@ -3,6 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Basic&family=Domine:wght@500&display=swap');
 /*-------------------- header --------------------*/
 
+.bg-body-tertiary {
+  background-color: #212529;
+  opacity: 1;
+}
+
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -14,6 +20,7 @@ nav {
 }
 
 header button {
+  width: 120px;
   padding: 5px 20px;
   background: #0000;
   color: #fff;
@@ -736,11 +743,15 @@ section.contact img {
 }
 
 .filterBtn button {
-  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 10px;
   text-align: center;
   background: #21252947;
   color: #fff;
-  width: 165px;
+  min-width: 165px;
   text-align: center;
 }
 
@@ -848,6 +859,7 @@ section.contact img {
 }
 
 nav.bg-body-tertiary.navbar.navbar-expand-lg.navbar-light {
+  background-color: #212529 !important;
   padding: 10px 90px;
 }
 

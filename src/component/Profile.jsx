@@ -37,7 +37,7 @@ const Profile = ({ user }) => {
       <div className="container-fluid abt">
         <div className="row">
           <div className="col-sm-12">
-            <h2>Checkout </h2>
+            <h2>My Order History </h2>
           </div>
         </div>
       </div>

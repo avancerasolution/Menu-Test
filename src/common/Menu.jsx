@@ -42,7 +42,7 @@ function Menu() {
   return (
     <>
       =
-      <div className="menuHeader">
+      <div className="menuHeader" id="menu">
         <h2>Menu</h2>
         <h1>Most Popular Items</h1>
       </div>
@@ -72,7 +72,7 @@ function Menu() {
             {filteredData &&
               filteredData.map((data) => {
                 return <div className="col-sm-4 cards" key={data.id}>
-                  <Card style={{ width: "18rem" }} className="col-sm-3 ">
+                  <Card className="col-sm-3 ">
                     <Card.Img
                       variant="top"
                       src={

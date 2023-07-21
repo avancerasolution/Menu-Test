@@ -10,6 +10,7 @@ import orderreducer from './reducer/orderreducer';
 import orderDetailReducer from './reducer/orderDetailReducer';
 import aboutReducer from './reducer/aboutReducer';
 import voucherCodeSlice from './reducer/voucherbycode';
+import cartReducer from "./reducer/cart.reducer";
 
 const rootReducer = combineReducers({
 
@@ -23,8 +24,9 @@ const rootReducer = combineReducers({
     order: orderreducer,
     orderdetail: orderDetailReducer,
     about: aboutReducer,
-    vouchercode: voucherCodeSlice
-   
+    vouchercode: voucherCodeSlice,
+    cart: cartReducer,
+
 })
 
 export default rootReducer

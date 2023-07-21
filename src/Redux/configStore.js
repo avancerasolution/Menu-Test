@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['postpackage', 'getleads', 'updateimage', 'getsingleorder', 'getpackage', 'getuser', 'getorder', 'auth', 'getleads']
+    whitelist: ["cart", 'postpackage', 'getleads', 'updateimage', 'getsingleorder', 'getpackage', 'getuser', 'getorder', 'auth', 'getleads']
 
 
 };

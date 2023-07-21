@@ -4,10 +4,14 @@ import banner2 from "../assets/banner2.png";
 import banner3 from "../assets/banner1.png";
 
 function Slider() {
+  const scrollToView=()=>{
+    const wow = document.getElementById("menu")
+    console.log(wow,"<====")
+  }
   return (
     <div className="Slider">
       <Carousel indicators={false} dots={true} controls={true}>
-        <Carousel.Item interval={2000}>
+        <Carousel.Item interval={2000} onClick={()=>scrollToView()}>
           <img className="d-block w-100" src={banner1} alt="First slide" />
         </Carousel.Item>
         <Carousel.Item interval={500}>
