@@ -5,7 +5,9 @@ export const fetchMenuData = () => async (dispatch) => {
     dispatch(fetchDataStart());
 
     try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/item`)
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/item?pageSize=100`
+        );
 
         const data = await response.data.result;
         dispatch(fetchDataSuccess(data));

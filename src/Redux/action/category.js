@@ -6,7 +6,9 @@ export const fetchCategory = () => async (dispatch) => {
     dispatch(fetchCategoryStart());
 
     try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/item-category`)
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/item-category?pageSize=100`
+        );
 
         const data = await response.data.result;
         dispatch(fetchCategorySuccess(data));

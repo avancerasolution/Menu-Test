@@ -39,6 +39,10 @@ const Login = () => {
       dispatch(clearError());
     }
   }, [dispatch, navigate, error, message]);
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
 
   return (
     <section className="contact login">

@@ -8,6 +8,11 @@ function About() {
   const dispatch = useDispatch();
   const { about, error } = useSelector((state) => state.about);
 
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
   useEffect(() => {
     dispatch(fetchAbout());
   }, [dispatch]);
@@ -40,6 +45,7 @@ function About() {
                 {about.result.image === undefined ? (
                   <></>
                 ) : (
+                  // eslint-disable-next-line jsx-a11y/img-redundant-alt
                   <img
                     src={
                       process.env.REACT_APP_ASSET_URL + about.result.image ===

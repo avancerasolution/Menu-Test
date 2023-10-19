@@ -194,6 +194,10 @@ const CartItem = ({
   useEffect(() => {
     calculateFinalPrice();
   });
+  
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <Fragment>
       <div className="container-fluid abt">
@@ -260,7 +264,9 @@ const CartItem = ({
                     </div>
                   </td>
                   <td className="cross">
-                    <button onClick={() => removeElement(index, data?.quantity)}>
+                    <button
+                      onClick={() => removeElement(index, data?.quantity)}
+                    >
                       <ImCross />
                     </button>
                   </td>
@@ -273,7 +279,7 @@ const CartItem = ({
           </table>
         </div>
         <div className="row">
-          <div className="col-sm-3">
+          <div className="col-sm-4">
             <input
               value={"Tax 13%"}
               readOnly
@@ -281,7 +287,7 @@ const CartItem = ({
               name="voucher_code"
             ></input>
           </div>
-          <div className="col-sm-3">
+          <div className="col-sm-4">
             <input
               value={
                 voucherbycode === undefined
@@ -297,25 +303,26 @@ const CartItem = ({
               name="voucher_code"
             ></input>
           </div>
-          <div className="col-sm-3">
+          <div className="col-sm-4">
             <input
               value={` Total Price ${calculateFinalPrice(totalPrice)} $`}
               onChange={handleChange}
               placeholder="Discount 0"
               name="voucher_code"
+              disabled={true}
             ></input>
           </div>
-          <div className="col-sm-3">
+          <div className="col-sm-12 voucherSection">
             <input
               onChange={handleChange}
               placeholder="Add Voucher"
               name="voucher_code"
             ></input>
-            <button className="checkOutBtn" onClick={handleApplyVoucherCode}>
+            <button className="checkOutBtn1" onClick={handleApplyVoucherCode}>
               Apply Voucher
             </button>
           </div>
-          <div>
+          <div className="col-sm-12 checkOutSection">
             <button className="checkOutBtn1" onClick={submit}>
               Check Out
             </button>

@@ -83,6 +83,9 @@ const Cart = ({
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(cartItems));
   }, [cartItems, setSingleOrderQuantity]);
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <Fragment>
       <div className="container-fluid abt">

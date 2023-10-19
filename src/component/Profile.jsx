@@ -32,6 +32,10 @@ const Profile = ({ user }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
   return (
     <Fragment>
       <div className="container-fluid abt">

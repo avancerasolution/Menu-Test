@@ -44,6 +44,10 @@ const Contact = ({ isAuthenticated }) => {
     }
   }, [dispatch, error, messages, navigate]);
 
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
   return (
     <>
       <section className="contact">

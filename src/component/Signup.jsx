@@ -54,6 +54,10 @@ const Signup = () => {
     }
   }, [dispatch, error, message, navigate]);
 
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <section className="contact login">
       <div className="container-fluid abt">
