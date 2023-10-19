@@ -99,7 +99,7 @@ const Header = ({ orderCount, user, setorderCount }) => {
                     </span>
 
                     <Link to="/myprofile">
-                      <button>My Profile</button>
+                      <button>My Orders</button>
                     </Link>
                     <button onClick={handleLogout}>Logout</button>
                   </>
