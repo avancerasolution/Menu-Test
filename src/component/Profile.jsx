@@ -49,7 +49,9 @@ const Profile = ({ user }) => {
         <div className="tabres">
           <table>
             <thead>
-              <th>Transaction id</th>
+              <th>Order id</th>
+              <th>Quantity</th>
+              <th>Price</th>
               <th>Date</th>
 
               <th>Action</th>
@@ -59,9 +61,11 @@ const Profile = ({ user }) => {
               <></>
             ) : (
               order &&
-              order.map((data) => (
+              order.map((data, key) => (
                 <tbody>
-                  <td>{data.transaction_id}</td>
+                  <td>Order # {order.length - key}</td>
+                  <td>{data.total_qty}</td>
+                  <td>{data.total_price}</td>
                   <td>{data.createdAt.split("T")[0]}</td>
 
                   <td>
