@@ -64,8 +64,8 @@ const Profile = ({ user }) => {
               order.map((data, key) => (
                 <tbody>
                   <td>Order # {order.length - key}</td>
-                  <td>{data.total_qty}</td>
-                  <td>{data.total_price}</td>
+                  <td>{data.total_qty} items</td>
+                  <td> ${data.total_price}</td>
                   <td>{data.createdAt.split("T")[0]}</td>
 
                   <td>
