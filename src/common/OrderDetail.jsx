@@ -10,16 +10,17 @@ const OrderDetail = ({ id }) => {
   const { data, loading, error } = useSelector((state) => state.orderdetail);
   useEffect(() => {
     dispatch(fetchOrderDetail(id));
-    getTotal();
   }, [dispatch, id]);
 
-  const getTotal = () => {
+  useEffect(() => {
     let total = 0;
     data.forEach((element) => {
       total = total + element.total_price;
     });
     setTotal(total);
-  };
+  }, [data]);
+
+
 
   useEffect(() => {
     if (loading) {
