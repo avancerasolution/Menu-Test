@@ -7,7 +7,7 @@ export const fetchCategory = () => async (dispatch) => {
 
     try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/item-category?pageSize=100`
+          `${process.env.REACT_APP_BASE_URL}/item-category?pageSize=1000`
         );
 
         const data = await response.data.result;

@@ -34,7 +34,9 @@ const checkOutReducer = createSlice({
             state.data = action.payload
             state.message = "Your Order is Created successfully!"
 
-
+            localStorage.removeItem("items");
+            localStorage.setItem("totalValue", 0);
+ 
 
         },
 

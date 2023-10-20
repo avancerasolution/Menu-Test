@@ -55,7 +55,7 @@ function Menu() {
                 <BiFoodMenu /> All
               </button>
               {category &&
-                category.map((item) => (
+                category?.map((item) => (
                   <>
                     <button
                       onClick={() => handleCategoryClick(item.item_category_id)}

@@ -34,7 +34,13 @@ const Signup = () => {
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!emailregex.test(data.main_email)) {
       toast.error("Invalid Email Address");
-    } else if (confirmPassword !== data.password) {
+    }else if (data.password.length <= 7){
+
+      toast.error("Password is must Be greater then 8 characters");
+      
+    }
+    
+    else if (confirmPassword !== data.password) {
       toast.error("Password and Confirm Password is Not Matched");
     } else {
       await dispatch(signup(data));

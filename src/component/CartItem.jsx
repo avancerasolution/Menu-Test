@@ -80,10 +80,11 @@ const CartItem = ({
         register.voucher_code = registeration.voucher_code;
       }
       const formData = { ...register };
+      setCartItems([]);
 
       setrecords([...records, formData]);
 
-      await dispatch(checkout({ formData,navigate }));
+      await dispatch(checkout({ formData, navigate }));
     } catch (error) {
       toast.error(error);
     }
@@ -128,7 +129,7 @@ const CartItem = ({
       toast.success(message);
       dispatch(clearMessage());
       setorderCount(0);
-      localStorage.removeItem("items");
+
       navigate("/myprofile");
     }
     if (voucherMessage) {
@@ -153,9 +154,8 @@ const CartItem = ({
   };
 
   const setQuantity = (qty, point) => {
-    console.log(qty,point,"<----")
-    if(qty<1){
-      return
+    if (qty < 1) {
+      return;
     }
     let currentStream = [...data];
 

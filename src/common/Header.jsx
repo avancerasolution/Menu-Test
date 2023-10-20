@@ -99,9 +99,11 @@ const Header = ({ orderCount, user, setorderCount }) => {
                     </span>
 
                     <Link to="/myprofile">
-                      <button>My Orders</button>
+                      <button className="logOutBtn">My Orders</button>
                     </Link>
-                    <button onClick={handleLogout}>Logout</button>
+                    <button className="logOutBtn" onClick={handleLogout}>
+                      Logout
+                    </button>
                   </>
                 )}
               </div>

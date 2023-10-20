@@ -82,7 +82,7 @@ const Cart = ({
   //set data on localstorage
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(cartItems));
-  }, [cartItems, setSingleOrderQuantity]);
+  }, [cartItems]);
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
