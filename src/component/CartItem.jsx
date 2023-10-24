@@ -194,7 +194,7 @@ const CartItem = ({
   useEffect(() => {
     calculateFinalPrice();
   });
-  
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -225,57 +225,61 @@ const CartItem = ({
                 <th>Sub Total</th>
               </tr>
             </thead>
-            {data?.map((data, index) => (
-              <tbody>
-                <tr>
-                  <td>
-                    <div className="d-flex cardImage">
-                      <div>
-                        <img
-                          src={
-                            process.env.REACT_APP_ASSET_URL +
-                            data?.item_main_picture_url
-                          }
-                          alt=""
-                        />
+            {data && data.length !== 0 ? (
+              data?.map((data, index) => (
+                <tbody>
+                  <tr>
+                    <td>
+                      <div className="d-flex cardImage">
+                        <div>
+                          <img
+                            src={
+                              process.env.REACT_APP_ASSET_URL +
+                              data?.item_main_picture_url
+                            }
+                            alt=""
+                          />
+                        </div>
+                        <div>
+                          <h2> {data?.item_name} </h2>
+                          <h5>product code is {data?.item_department_code}</h5>
+                        </div>
                       </div>
-                      <div>
-                        <h2> {data?.item_name} </h2>
-                        <h5>product code is {data?.item_department_code}</h5>
+                    </td>
+                    <td className="cross2">{data?.item_price2}</td>
+                    <td>
+                      <div className="btnSection1">
+                        <button
+                          onClick={() => setQuantity(data?.quantity - 1, index)}
+                        >
+                          -
+                        </button>
+                        <p>
+                          <span> {data?.quantity} </span>
+                        </p>
+                        <button
+                          onClick={() => setQuantity(data?.quantity + 1, index)}
+                        >
+                          +
+                        </button>
                       </div>
-                    </div>
-                  </td>
-                  <td className="cross2">{data?.item_price2}</td>
-                  <td>
-                    <div className="btnSection1">
+                    </td>
+                    <td className="cross">
                       <button
-                        onClick={() => setQuantity(data?.quantity - 1, index)}
+                        onClick={() => removeElement(index, data?.quantity)}
                       >
-                        -
+                        <ImCross />
                       </button>
-                      <p>
-                        <span> {data?.quantity} </span>
-                      </p>
-                      <button
-                        onClick={() => setQuantity(data?.quantity + 1, index)}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </td>
-                  <td className="cross">
-                    <button
-                      onClick={() => removeElement(index, data?.quantity)}
-                    >
-                      <ImCross />
-                    </button>
-                  </td>
-                  <td className="cross">
-                    {calculateTotalPrice(data?.item_price2, data?.quantity)}$
-                  </td>
-                </tr>
-              </tbody>
-            ))}
+                    </td>
+                    <td className="cross">
+                      {calculateTotalPrice(data?.item_price2, data?.quantity)}$
+                    </td>
+                  </tr>
+                </tbody>
+              ))
+            ) : (
+              <div>No Data Found</div>
+            )}{" "}
           </table>
         </div>
         <div className="row">
@@ -323,10 +327,13 @@ const CartItem = ({
             </button>
           </div>
           <div className="col-sm-12 checkOutSection">
-            <button className="checkOutBtn1" onClick={submit}>
-              Check Out
-            </button>
-          </div>
+    {    
+       data && data.length !== 0 ?
+       <button className="checkOutBtn1" onClick={submit}>
+          Check Out
+        </button>
+:<></>}
+    </div>
         </div>
       </div>
     </Fragment>

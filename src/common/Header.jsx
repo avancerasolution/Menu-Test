@@ -14,7 +14,7 @@ import { logout } from "../Redux/action/signup";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-const Header = ({ orderCount, user, setorderCount }) => {
+const Header = ({ orderCount, setorderCount, setCartItems }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,8 +23,10 @@ const Header = ({ orderCount, user, setorderCount }) => {
   const handleLogout = async (event) => {
     event.preventDefault();
     await dispatch(logout());
+    setCartItems([]);
+    localStorage.removeItem("items");
+    await localStorage.removeItem("totalValue");
     setorderCount(0);
-
     navigate("/");
   };
   const handleAuthenticated = () => {
@@ -34,11 +36,14 @@ const Header = ({ orderCount, user, setorderCount }) => {
 
   const items = JSON.parse(localStorage.getItem("items"));
 
-  const totalValue = items?.reduce((sum, item) => sum + item.quantity, 0);
+  const totalValue = items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
   setorderCount(totalValue);
   useEffect(() => {
     localStorage.setItem("totalValue", JSON.stringify(totalValue));
   }, [orderCount, totalValue]);
+
+  console.log(orderCount, "<=====orderCount");
+
   return (
     <Fragment>
       <header>
@@ -74,7 +79,7 @@ const Header = ({ orderCount, user, setorderCount }) => {
                 ) : (
                   <p onClick={handleAuthenticated}>
                     {" "}
-                    <span> {totalValue} </span> <AiOutlineShoppingCart />
+                    <span> </span> <AiOutlineShoppingCart />
                   </p>
                 )}
 

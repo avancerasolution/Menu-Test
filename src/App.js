@@ -38,19 +38,55 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header orderCount={orderCount} isAuthenticated={isAuthenticated} user={data} setorderCount={setorderCount} />
+        <Header
+          setCartItems={setCartItems}
+          orderCount={orderCount}
+          isAuthenticated={isAuthenticated}
+          user={data}
+          setorderCount={setorderCount}
+        />
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/contact" element={<Contact isAuthenticated={isAuthenticated} />} />
+          <Route
+            path="/contact"
+            element={<Contact isAuthenticated={isAuthenticated} />}
+          />
           <Route path="/about" element={<About />} />
-          <Route path="/cartItem" element={<CartItem setCartItems={setCartItems} cartItems={cartItems} setorderCount={setorderCount} orderCount={orderCount} user={data} setSingleOrderQuantity={setSingleOrderQuantity} singleOrderQuantity={singleOrderQuantity} />} />
+          <Route
+            path="/cartItem"
+            element={
+              <CartItem
+                setCartItems={setCartItems}
+                cartItems={cartItems}
+                setorderCount={setorderCount}
+                orderCount={orderCount}
+                user={data}
+                setSingleOrderQuantity={setSingleOrderQuantity}
+                singleOrderQuantity={singleOrderQuantity}
+              />
+            }
+          />
 
           <Route path="/policy" element={<Policy />} />
-          <Route path="/cart" element={<Cart setorderCount={setorderCount} orderCount={orderCount} isAuthenticated={isAuthenticated} setCartItems={setCartItems} cartItems={cartItems} setSingleOrderQuantity={setSingleOrderQuantity} singleOrderQuantity={singleOrderQuantity} quan={quan} setQuan={setQuan} />} />
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                setorderCount={setorderCount}
+                orderCount={orderCount}
+                isAuthenticated={isAuthenticated}
+                setCartItems={setCartItems}
+                cartItems={cartItems}
+                setSingleOrderQuantity={setSingleOrderQuantity}
+                singleOrderQuantity={singleOrderQuantity}
+                quan={quan}
+                setQuan={setQuan}
+              />
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/myprofile" element={<Profile user={data} />} />
-
         </Routes>
         <Footer />
       </BrowserRouter>
